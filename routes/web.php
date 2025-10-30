@@ -7,11 +7,15 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\Auth\OrganizationRegistrationController;
 use App\Http\Controllers\PageController as PublicPageController;
+use App\Http\Controllers\LanguageController;
 
 // Keep one simple test route for debugging if needed
 Route::get('/debug-route', function () {
     return 'Route system is working!';
 });
+
+// Language switching route
+Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,7 +42,17 @@ Route::get('/organizations/pending-approval', function () {
 })->middleware(['auth'])->name('organizations.pending-approval');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $user = Auth::user();
+    
+    // Redirect to role-specific dashboard
+    if ($user->hasRole('admin')) {
+        return redirect()->route('admin.dashboard');
+    } elseif ($user->hasRole(['organization-manager', 'organization-staff'])) {
+        return redirect()->route('organization.dashboard');
+    } else {
+        // Default to volunteer dashboard
+        return redirect()->route('volunteer.dashboard');
+    }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

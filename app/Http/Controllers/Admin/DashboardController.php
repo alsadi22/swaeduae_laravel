@@ -31,9 +31,20 @@ class DashboardController extends Controller
         $recentOrganizations = Organization::with('users')->latest()->take(5)->get();
         $recentEvents = Event::with('organization')->latest()->take(5)->get();
         
-        // Get monthly trends for the last 6 months (PostgreSQL compatible)
+        // Get monthly trends for the last 6 months (database-agnostic)
+        $driver = DB::connection()->getDriverName();
+        
+        if ($driver === 'pgsql') {
+            $dateFormat = "TO_CHAR(created_at, 'YYYY-MM')";
+        } elseif ($driver === 'mysql') {
+            $dateFormat = "DATE_FORMAT(created_at, '%Y-%m')";
+        } else {
+            // SQLite and others
+            $dateFormat = "strftime('%Y-%m', created_at)";
+        }
+        
         $monthlyUserTrends = User::select(
-            DB::raw("TO_CHAR(created_at, 'YYYY-MM') as month"),
+            DB::raw("{$dateFormat} as month"),
             DB::raw('COUNT(*) as count')
         )
         ->where('created_at', '>=', now()->subMonths(6))
@@ -42,7 +53,7 @@ class DashboardController extends Controller
         ->get();
         
         $monthlyEventTrends = Event::select(
-            DB::raw("TO_CHAR(created_at, 'YYYY-MM') as month"),
+            DB::raw("{$dateFormat} as month"),
             DB::raw('COUNT(*) as count')
         )
         ->where('created_at', '>=', now()->subMonths(6))

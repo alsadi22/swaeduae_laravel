@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,8 +40,28 @@
                     </div>
                     
                     <div class="hidden md:flex md:items-center md:space-x-4">
+                        <!-- Language Toggle -->
+                        <div class="flex items-center space-x-2 mr-2">
+                            <a href="{{ route('language.switch', 'en') }}" 
+                               class="px-3 py-1 text-sm font-medium rounded-md transition {{ app()->getLocale() == 'en' ? 'bg-red-600 text-white' : 'text-gray-700 hover:bg-gray-100' }}">
+                                EN
+                            </a>
+                            <span class="text-gray-400">|</span>
+                            <a href="{{ route('language.switch', 'ar') }}" 
+                               class="px-3 py-1 text-sm font-medium rounded-md transition {{ app()->getLocale() == 'ar' ? 'bg-red-600 text-white' : 'text-gray-700 hover:bg-gray-100' }}">
+                                AR
+                            </a>
+                        </div>
+                        
                         @auth
-                            <a href="{{ route('dashboard') }}" class="text-gray-900 hover:text-red-600 px-3 py-2 text-sm font-medium">Dashboard</a>
+                            @php
+                                $dashboardRoute = auth()->user()->hasRole('admin') 
+                                    ? route('admin.dashboard') 
+                                    : (auth()->user()->hasRole(['organization-manager', 'organization-staff']) 
+                                        ? route('organization.dashboard') 
+                                        : route('volunteer.dashboard'));
+                            @endphp
+                            <a href="{{ $dashboardRoute }}" class="text-gray-900 hover:text-red-600 px-3 py-2 text-sm font-medium">Dashboard</a>
                         @else
                             <a href="{{ route('login') }}" class="text-gray-900 hover:text-red-600 px-3 py-2 text-sm font-medium">Sign In</a>
                             <a href="{{ route('register') }}" class="bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-700">Volunteer Sign Up</a>

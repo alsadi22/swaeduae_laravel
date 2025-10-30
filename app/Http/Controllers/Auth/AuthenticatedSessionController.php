@@ -28,7 +28,23 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended($this->getDashboardRoute());
+    }
+
+    /**
+     * Get the dashboard route based on user role.
+     */
+    protected function getDashboardRoute(): string
+    {
+        $user = Auth::user();
+
+        if ($user->hasRole('admin')) {
+            return route('admin.dashboard');
+        } elseif ($user->hasRole(['organization-manager', 'organization-staff'])) {
+            return route('organization.dashboard');
+        } else {
+            return route('volunteer.dashboard');
+        }
     }
 
     /**

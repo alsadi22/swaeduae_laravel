@@ -96,14 +96,19 @@ class OrganizationController extends Controller
         $upcomingEvents = $organization->events->where('start_date', '>=', now());
         $pastEvents = $organization->events->where('end_date', '<', now());
 
-        // Get organization statistics
+        // Get organization statistics (optimized to avoid N+1 queries)
+        $totalVolunteers = \DB::table('applications')
+            ->join('events', 'applications.event_id', '=', 'events.id')
+            ->where('events.organization_id', $organization->id)
+            ->where('applications.status', 'approved')
+            ->distinct('applications.user_id')
+            ->count('applications.user_id');
+        
         $stats = [
             'total_events' => $organization->events->count(),
             'upcoming_events' => $upcomingEvents->count(),
             'completed_events' => $pastEvents->count(),
-            'total_volunteers' => $organization->events->sum(function($event) {
-                return $event->applications()->where('status', 'approved')->count();
-            })
+            'total_volunteers' => $totalVolunteers
         ];
 
         return view('organizations.show', compact('organization', 'upcomingEvents', 'pastEvents', 'stats'));

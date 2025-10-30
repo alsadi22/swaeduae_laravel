@@ -59,7 +59,18 @@
         </button>
         
         <p class="text-gray-500 text-sm mt-6">
-            <a href="{{ route('dashboard') }}" class="text-red-600 hover:text-red-800">Go to Dashboard</a>
+            @auth
+                @php
+                    $dashboardRoute = auth()->user()->hasRole('admin') 
+                        ? route('admin.dashboard') 
+                        : (auth()->user()->hasRole(['organization-manager', 'organization-staff']) 
+                            ? route('organization.dashboard') 
+                            : route('volunteer.dashboard'));
+                @endphp
+                <a href="{{ $dashboardRoute }}" class="text-red-600 hover:text-red-800">Go to Dashboard</a>
+            @else
+                <a href="{{ route('home') }}" class="text-red-600 hover:text-red-800">Go to Home</a>
+            @endauth
         </p>
     </div>
     

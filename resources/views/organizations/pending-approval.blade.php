@@ -36,7 +36,14 @@
                         </div>
                         
                         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="{{ route('dashboard') }}" class="bg-gray-500 text-white px-6 py-3 rounded-md font-medium hover:bg-gray-600">
+                            @php
+                                $dashboardRoute = auth()->user()->hasRole('admin') 
+                                    ? route('admin.dashboard') 
+                                    : (auth()->user()->hasRole(['organization-manager', 'organization-staff']) 
+                                        ? route('organization.dashboard') 
+                                        : route('volunteer.dashboard'));
+                            @endphp
+                            <a href="{{ $dashboardRoute }}" class="bg-gray-500 text-white px-6 py-3 rounded-md font-medium hover:bg-gray-600">
                                 Go to Dashboard
                             </a>
                             <a href="{{ route('profile.edit') }}" class="bg-blue-500 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-600">

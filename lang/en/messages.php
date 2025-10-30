@@ -1,0 +1,160 @@
+<?php
+
+return [
+    // Navigation
+    'nav' => [
+        'home' => 'Home',
+        'features' => 'Features',
+        'how_it_works' => 'How It Works',
+        'opportunities' => 'Opportunities',
+        'organizations' => 'Organizations',
+        'contact' => 'Contact',
+        'sign_in' => 'Sign In',
+        'volunteer_sign_up' => 'Volunteer Sign Up',
+        'organization_sign_up' => 'Organization Sign Up',
+        'dashboard' => 'Dashboard',
+        'profile' => 'Profile',
+        'settings' => 'Settings',
+        'logout' => 'Logout',
+        'events' => 'Events',
+        'certificates' => 'Certificates',
+        'badges' => 'Badges',
+        'applications' => 'Applications',
+        'reports' => 'Reports',
+        'users' => 'Users',
+        'pages' => 'Pages',
+    ],
+
+    // Homepage
+    'home' => [
+        'hero_title' => 'Volunteer for a Better UAE',
+        'hero_subtitle' => 'Connect with meaningful volunteer opportunities, track your impact, and build a stronger community across the United Arab Emirates.',
+        'start_volunteering' => 'Start Volunteering',
+        'organizations_join' => 'Organizations Join Here',
+        'impact_title' => 'Our Impact',
+        'impact_subtitle' => 'Join thousands of volunteers making a difference across the UAE',
+        'active_volunteers' => 'Active Volunteers',
+        'partner_organizations' => 'Partner Organizations',
+        'volunteer_hours' => 'Volunteer Hours',
+        'events_completed' => 'Events Completed',
+    ],
+
+    // Buttons & Actions
+    'actions' => [
+        'view_details' => 'View Details',
+        'apply_now' => 'Apply Now',
+        'browse_all' => 'Browse All Opportunities',
+        'register' => 'Register',
+        'login' => 'Login',
+        'submit' => 'Submit',
+        'cancel' => 'Cancel',
+        'save' => 'Save',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+        'approve' => 'Approve',
+        'reject' => 'Reject',
+        'search' => 'Search',
+        'filter' => 'Filter',
+        'export' => 'Export',
+        'download' => 'Download',
+        'back' => 'Back',
+        'next' => 'Next',
+        'previous' => 'Previous',
+        'close' => 'Close',
+    ],
+
+    // Common
+    'common' => [
+        'welcome' => 'Welcome',
+        'hello' => 'Hello',
+        'loading' => 'Loading...',
+        'no_data' => 'No data available',
+        'success' => 'Success',
+        'error' => 'Error',
+        'warning' => 'Warning',
+        'info' => 'Information',
+        'confirm' => 'Are you sure?',
+        'yes' => 'Yes',
+        'no' => 'No',
+        'all' => 'All',
+        'active' => 'Active',
+        'inactive' => 'Inactive',
+        'pending' => 'Pending',
+        'approved' => 'Approved',
+        'rejected' => 'Rejected',
+        'completed' => 'Completed',
+        'cancelled' => 'Cancelled',
+        'total' => 'Total',
+        'of' => 'of',
+        'showing' => 'Showing',
+        'results' => 'Results',
+    ],
+
+    // Events
+    'events' => [
+        'title' => 'Volunteer Opportunities',
+        'upcoming' => 'Upcoming Events',
+        'past' => 'Past Events',
+        'my_events' => 'My Events',
+        'event_details' => 'Event Details',
+        'location' => 'Location',
+        'date' => 'Date',
+        'time' => 'Time',
+        'category' => 'Category',
+        'skills_required' => 'Skills Required',
+        'volunteers_needed' => 'Volunteers Needed',
+        'spots_available' => 'Spots Available',
+        'duration' => 'Duration',
+    ],
+
+    // Organizations
+    'organizations' => [
+        'title' => 'Partner Organizations',
+        'about' => 'About Organization',
+        'contact_info' => 'Contact Information',
+        'website' => 'Website',
+        'upcoming_events' => 'Upcoming Events',
+        'total_events' => 'Total Events',
+        'total_volunteers' => 'Total Volunteers',
+    ],
+
+    // Footer
+    'footer' => [
+        'tagline' => 'Empowering volunteers and organizations to create positive change across the UAE.',
+        'quick_links' => 'Quick Links',
+        'resources' => 'Resources',
+        'legal' => 'Legal',
+        'privacy_policy' => 'Privacy Policy',
+        'terms_of_service' => 'Terms of Service',
+        'cookie_policy' => 'Cookie Policy',
+        'volunteer_guide' => 'Volunteer Guide',
+        'organization_resources' => 'Organization Resources',
+        'faq' => 'FAQ',
+        'blog' => 'Blog',
+        'email_us' => 'Email Us',
+        'call_us' => 'Call Us',
+        'whatsapp' => 'WhatsApp',
+        'visit_us' => 'Visit Us',
+        'all_rights_reserved' => 'All rights reserved.',
+    ],
+
+    // Roles
+    'roles' => [
+        'admin' => 'Admin',
+        'volunteer' => 'Volunteer',
+        'organization_manager' => 'Organization Manager',
+        'organization_staff' => 'Organization Staff',
+    ],
+
+    // Notifications
+    'notifications' => [
+        'application_submitted' => 'Your application has been submitted successfully!',
+        'application_approved' => 'Your application has been approved!',
+        'application_rejected' => 'Your application has been rejected.',
+        'profile_updated' => 'Your profile has been updated successfully!',
+        'event_created' => 'Event created successfully!',
+        'event_updated' => 'Event updated successfully!',
+        'event_deleted' => 'Event deleted successfully!',
+    ],
+];
+

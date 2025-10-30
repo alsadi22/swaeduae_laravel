@@ -5,14 +5,23 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    @php
+                        $dashboardRoute = auth()->check() 
+                            ? (auth()->user()->hasRole('admin') 
+                                ? route('admin.dashboard') 
+                                : (auth()->user()->hasRole(['organization-manager', 'organization-staff']) 
+                                    ? route('organization.dashboard') 
+                                    : route('volunteer.dashboard')))
+                            : route('home');
+                    @endphp
+                    <a href="{{ $dashboardRoute }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="$dashboardRoute" :active="request()->routeIs(['dashboard', 'admin.dashboard', 'volunteer.dashboard', 'organization.dashboard'])">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
@@ -20,7 +29,20 @@
 
             <!-- Settings Dropdown -->
             @auth
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4">
+                <!-- Language Toggle -->
+                <div class="flex items-center space-x-2">
+                    <a href="{{ route('language.switch', 'en') }}" 
+                       class="px-2 py-1 text-sm font-medium rounded {{ app()->getLocale() == 'en' ? 'bg-red-600 text-white' : 'text-gray-700 hover:bg-gray-100' }}">
+                        EN
+                    </a>
+                    <span class="text-gray-400">|</span>
+                    <a href="{{ route('language.switch', 'ar') }}" 
+                       class="px-2 py-1 text-sm font-medium rounded {{ app()->getLocale() == 'ar' ? 'bg-red-600 text-white' : 'text-gray-700 hover:bg-gray-100' }}">
+                        AR
+                    </a>
+                </div>
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -69,7 +91,16 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            @php
+                $dashboardRoute = auth()->check() 
+                    ? (auth()->user()->hasRole('admin') 
+                        ? route('admin.dashboard') 
+                        : (auth()->user()->hasRole(['organization-manager', 'organization-staff']) 
+                            ? route('organization.dashboard') 
+                            : route('volunteer.dashboard')))
+                    : route('home');
+            @endphp
+            <x-responsive-nav-link :href="$dashboardRoute" :active="request()->routeIs(['dashboard', 'admin.dashboard', 'volunteer.dashboard', 'organization.dashboard'])">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>

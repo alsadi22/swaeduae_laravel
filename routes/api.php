@@ -23,25 +23,29 @@ Route::get('/debug', function () {
     return 'Simple debug response';
 });
 
-// Public routes
-Route::post('/auth/login', [AuthController::class, 'login']);
-Route::post('/auth/register', [AuthController::class, 'register']);
-Route::post('/auth/forgot-password', [AuthController::class, 'forgotPassword']);
-Route::post('/auth/reset-password', [AuthController::class, 'resetPassword']);
+// Public routes with rate limiting
+Route::middleware(['throttle:5,1'])->group(function () {
+    Route::post('/auth/login', [AuthController::class, 'login']);
+    Route::post('/auth/register', [AuthController::class, 'register']);
+    Route::post('/auth/forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('/auth/reset-password', [AuthController::class, 'resetPassword']);
+});
 
-// Public event routes
-Route::get('/events', [EventController::class, 'index']);
-Route::get('/events/{event}', [EventController::class, 'show']);
+// Public event routes with general rate limiting
+Route::middleware(['throttle:60,1'])->group(function () {
+    Route::get('/events', [EventController::class, 'index']);
+    Route::get('/events/{event}', [EventController::class, 'show']);
+    
+    // Public organization routes
+    Route::get('/organizations', [ApiOrganizationController::class, 'index']);
+    Route::get('/organizations/{organization}', [ApiOrganizationController::class, 'show']);
+    
+    // Certificate verification (public)
+    Route::post('/certificates/verify', [CertificateController::class, 'verify']);
+});
 
-// Public organization routes
-Route::get('/organizations', [ApiOrganizationController::class, 'index']);
-Route::get('/organizations/{organization}', [ApiOrganizationController::class, 'show']);
-
-// Certificate verification (public)
-Route::post('/certificates/verify', [CertificateController::class, 'verify']);
-
-// Protected routes
-Route::middleware('auth:sanctum')->group(function () {
+// Protected routes with rate limiting
+Route::middleware(['auth:sanctum', 'throttle:120,1'])->group(function () {
     // User profile
     Route::get('/user', function (Request $request) {
         return $request->user();

@@ -73,7 +73,8 @@ class Page extends Model
      */
     public function setContentAttribute($value)
     {
-        $this->attributes['content'] = $value;
+        // Sanitize HTML content to prevent XSS attacks
+        $this->attributes['content'] = \Mews\Purifier\Facades\Purifier::clean($value);
     }
 
     /**
@@ -81,6 +82,7 @@ class Page extends Model
      */
     public function getContentAttribute($value)
     {
+        // Content is already sanitized when stored
         return $value;
     }
 }

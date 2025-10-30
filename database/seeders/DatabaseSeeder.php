@@ -31,34 +31,41 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         // Create a test admin user
+        // IMPORTANT: Change these passwords in production!
+        // Default password for development: Admin@2025!Swaed
         $adminUser = User::firstOrCreate(
             ['email' => 'admin@swaeduae.ae'],
             [
                 'name' => 'Admin User',
                 'email_verified_at' => now(),
-                'password' => bcrypt('password'),
+                'password' => bcrypt('Admin@2025!Swaed'),
+                'unique_id' => 'ADMIN' . strtoupper(uniqid()),
             ]
         );
         $adminUser->assignRole('admin');
 
         // Create a test volunteer user
+        // Default password for development: Volunteer@2025!Swaed
         $volunteerUser = User::firstOrCreate(
             ['email' => 'volunteer@swaeduae.ae'],
             [
                 'name' => 'Test Volunteer',
                 'email_verified_at' => now(),
-                'password' => bcrypt('password'),
+                'password' => bcrypt('Volunteer@2025!Swaed'),
+                'unique_id' => 'VOL' . strtoupper(uniqid()),
             ]
         );
         $volunteerUser->assignRole('volunteer');
 
         // Create a test organization manager
+        // Default password for development: Org@2025!Swaed
         $orgManagerUser = User::firstOrCreate(
             ['email' => 'org@swaeduae.ae'],
             [
                 'name' => 'Organization Manager',
                 'email_verified_at' => now(),
-                'password' => bcrypt('password'),
+                'password' => bcrypt('Org@2025!Swaed'),
+                'unique_id' => 'ORG' . strtoupper(uniqid()),
             ]
         );
         $orgManagerUser->assignRole('organization-manager');

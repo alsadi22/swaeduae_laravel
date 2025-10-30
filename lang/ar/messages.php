@@ -1,0 +1,160 @@
+<?php
+
+return [
+    // Navigation
+    'nav' => [
+        'home' => 'الرئيسية',
+        'features' => 'المميزات',
+        'how_it_works' => 'كيف يعمل',
+        'opportunities' => 'الفرص',
+        'organizations' => 'المنظمات',
+        'contact' => 'اتصل بنا',
+        'sign_in' => 'تسجيل الدخول',
+        'volunteer_sign_up' => 'تسجيل متطوع',
+        'organization_sign_up' => 'تسجيل منظمة',
+        'dashboard' => 'لوحة التحكم',
+        'profile' => 'الملف الشخصي',
+        'settings' => 'الإعدادات',
+        'logout' => 'تسجيل الخروج',
+        'events' => 'الفعاليات',
+        'certificates' => 'الشهادات',
+        'badges' => 'الأوسمة',
+        'applications' => 'الطلبات',
+        'reports' => 'التقارير',
+        'users' => 'المستخدمون',
+        'pages' => 'الصفحات',
+    ],
+
+    // Homepage
+    'home' => [
+        'hero_title' => 'تطوع من أجل الإمارات',
+        'hero_subtitle' => 'تواصل مع فرص تطوعية ذات مغزى، تتبع تأثيرك، وساهم في بناء مجتمع أقوى في جميع أنحاء دولة الإمارات العربية المتحدة.',
+        'start_volunteering' => 'ابدأ التطوع',
+        'organizations_join' => 'انضم كمنظمة',
+        'impact_title' => 'تأثيرنا',
+        'impact_subtitle' => 'انضم إلى آلاف المتطوعين الذين يحدثون فرقاً في الإمارات',
+        'active_volunteers' => 'متطوع نشط',
+        'partner_organizations' => 'منظمة شريكة',
+        'volunteer_hours' => 'ساعة تطوع',
+        'events_completed' => 'فعالية مكتملة',
+    ],
+
+    // Buttons & Actions
+    'actions' => [
+        'view_details' => 'عرض التفاصيل',
+        'apply_now' => 'قدم الآن',
+        'browse_all' => 'تصفح جميع الفرص',
+        'register' => 'تسجيل',
+        'login' => 'تسجيل الدخول',
+        'submit' => 'إرسال',
+        'cancel' => 'إلغاء',
+        'save' => 'حفظ',
+        'edit' => 'تعديل',
+        'delete' => 'حذف',
+        'approve' => 'موافقة',
+        'reject' => 'رفض',
+        'search' => 'بحث',
+        'filter' => 'تصفية',
+        'export' => 'تصدير',
+        'download' => 'تحميل',
+        'back' => 'رجوع',
+        'next' => 'التالي',
+        'previous' => 'السابق',
+        'close' => 'إغلاق',
+    ],
+
+    // Common
+    'common' => [
+        'welcome' => 'مرحباً',
+        'hello' => 'أهلاً',
+        'loading' => 'جاري التحميل...',
+        'no_data' => 'لا توجد بيانات متاحة',
+        'success' => 'نجح',
+        'error' => 'خطأ',
+        'warning' => 'تحذير',
+        'info' => 'معلومات',
+        'confirm' => 'هل أنت متأكد؟',
+        'yes' => 'نعم',
+        'no' => 'لا',
+        'all' => 'الكل',
+        'active' => 'نشط',
+        'inactive' => 'غير نشط',
+        'pending' => 'قيد الانتظار',
+        'approved' => 'موافق عليه',
+        'rejected' => 'مرفوض',
+        'completed' => 'مكتمل',
+        'cancelled' => 'ملغى',
+        'total' => 'المجموع',
+        'of' => 'من',
+        'showing' => 'عرض',
+        'results' => 'النتائج',
+    ],
+
+    // Events
+    'events' => [
+        'title' => 'فرص التطوع',
+        'upcoming' => 'الفعاليات القادمة',
+        'past' => 'الفعاليات السابقة',
+        'my_events' => 'فعالياتي',
+        'event_details' => 'تفاصيل الفعالية',
+        'location' => 'الموقع',
+        'date' => 'التاريخ',
+        'time' => 'الوقت',
+        'category' => 'الفئة',
+        'skills_required' => 'المهارات المطلوبة',
+        'volunteers_needed' => 'المتطوعون المطلوبون',
+        'spots_available' => 'الأماكن المتاحة',
+        'duration' => 'المدة',
+    ],
+
+    // Organizations
+    'organizations' => [
+        'title' => 'المنظمات الشريكة',
+        'about' => 'عن المنظمة',
+        'contact_info' => 'معلومات الاتصال',
+        'website' => 'الموقع الإلكتروني',
+        'upcoming_events' => 'الفعاليات القادمة',
+        'total_events' => 'إجمالي الفعاليات',
+        'total_volunteers' => 'إجمالي المتطوعين',
+    ],
+
+    // Footer
+    'footer' => [
+        'tagline' => 'تمكين المتطوعين والمنظمات لإحداث تغيير إيجابي في الإمارات.',
+        'quick_links' => 'روابط سريعة',
+        'resources' => 'الموارد',
+        'legal' => 'قانوني',
+        'privacy_policy' => 'سياسة الخصوصية',
+        'terms_of_service' => 'شروط الخدمة',
+        'cookie_policy' => 'سياسة ملفات تعريف الارتباط',
+        'volunteer_guide' => 'دليل المتطوع',
+        'organization_resources' => 'موارد المنظمات',
+        'faq' => 'الأسئلة الشائعة',
+        'blog' => 'المدونة',
+        'email_us' => 'راسلنا',
+        'call_us' => 'اتصل بنا',
+        'whatsapp' => 'واتساب',
+        'visit_us' => 'زورنا',
+        'all_rights_reserved' => 'جميع الحقوق محفوظة.',
+    ],
+
+    // Roles
+    'roles' => [
+        'admin' => 'مدير',
+        'volunteer' => 'متطوع',
+        'organization_manager' => 'مدير منظمة',
+        'organization_staff' => 'موظف منظمة',
+    ],
+
+    // Notifications
+    'notifications' => [
+        'application_submitted' => 'تم إرسال طلبك بنجاح!',
+        'application_approved' => 'تمت الموافقة على طلبك!',
+        'application_rejected' => 'تم رفض طلبك.',
+        'profile_updated' => 'تم تحديث ملفك الشخصي بنجاح!',
+        'event_created' => 'تم إنشاء الفعالية بنجاح!',
+        'event_updated' => 'تم تحديث الفعالية بنجاح!',
+        'event_deleted' => 'تم حذف الفعالية بنجاح!',
+    ],
+];
+
