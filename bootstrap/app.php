@@ -24,11 +24,16 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         // Register custom middleware aliases
-        // Temporarily commented out to debug routing issues
-        // $middleware->alias([
-        //     'role' => \App\Http\Middleware\RoleMiddleware::class,
-        //     'permission' => \App\Http\Middleware\PermissionMiddleware::class,
-        // ]);
+        $middleware->alias([
+            'role' => \App\Http\Middleware\RoleMiddleware::class,
+            'permission' => \App\Http\Middleware\PermissionMiddleware::class,
+            'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        ]);
+
+        // Add locale middleware to web group
+        $middleware->web(append: [
+            \App\Http\Middleware\SetLocale::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
