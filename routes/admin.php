@@ -67,8 +67,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('settings', [SettingsController::class, 'update'])->name('settings.update');
 
     // Pages
-    Route::resource('pages', PageController::class);
-    Route::post('pages/{page}/toggle-published', [PageController::class, 'togglePublished'])->name('pages.toggle-published');
+    Route::prefix('admin')->group(function () {
+        Route::resource('pages', PageController::class);
+        Route::post('pages/{page}/toggle-published', [PageController::class, 'togglePublished'])->name('pages.toggle-published');
+    });
 
     // Notification Management
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');

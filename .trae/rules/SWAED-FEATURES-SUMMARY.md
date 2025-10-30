@@ -148,6 +148,13 @@ This document provides a summary of the key features that have been implemented 
 
 ## Public Features
 
+### Homepage Enhancements
+- WhatsApp integration with floating contact button
+- Photo gallery section showcasing volunteer activities
+- Event browser section for upcoming opportunities
+- Navigation updates with "Opportunities" link
+- Clickable SwaedUAE logo redirecting to homepage
+
 ### Event Discovery
 - Public event listing
 - Search and filter functionality
@@ -164,6 +171,10 @@ This document provides a summary of the key features that have been implemented 
 - Contact Us page
 - Privacy Policy page
 - Terms of Service page
+- FAQ page
+- Volunteer Guide page
+- Organization Resources page
+- Cookie Policy page
 
 ## Authentication & Security
 
@@ -317,7 +328,7 @@ This document provides a summary of the key features that have been implemented 
 | Mobile Application Support | ✅ Complete | PWA and mobile API endpoints |
 | Gamification | ✅ Complete | Badge system with leaderboard and progress tracking |
 | API Endpoints | ✅ Complete | RESTful API fully implemented |
-| Website Management | ✅ Complete | Settings control panel and page management system |
+| Website Management | ✅ Complete | Settings control panel and page management system, homepage enhancements with WhatsApp integration, photo gallery, and event browser |
 | Third-party Integrations | 🔴 Not Started | No external integrations yet |
 | Advanced Testing | 🔴 Not Started | Unit tests not yet implemented |
 | Performance Optimization | 🔴 Not Started | Caching and optimization not implemented |

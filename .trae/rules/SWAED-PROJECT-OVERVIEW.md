@@ -14,7 +14,7 @@
 **Project:** SwaedUAE Laravel - UAE Volunteer Management Platform  
 **Target Server:** Ubuntu 22.04 LTS Self-Hosted
 
-**Implementation Status:** Updated October 30, 2025 - See [SWAED-IMPLEMENTATION-STATUS.md](SWAED-IMPLEMENTATION-STATUS.md) for current implementation details
+**Implementation Status:** Updated October 30, 2025 - See [SWAED-IMPLEMENTATION-STATUS.md](.trae/rules/SWAED-IMPLEMENTATION-STATUS.md) for current implementation details
 
 ---
 

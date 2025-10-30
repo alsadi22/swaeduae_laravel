@@ -195,7 +195,7 @@ Complete development roadmap for the SWAED volunteer management platform using L
 ## 🏆 Phase 5: Certificates & Achievements
 **Duration:** 2-3 weeks  
 **Priority:** Medium
-**Status:** ⚠️ PARTIALLY COMPLETED
+**Status:** ✅ COMPLETED
 
 ### Week 12-13: Digital Certificates
 - [x] **Certificate Generation**
@@ -211,13 +211,13 @@ Complete development roadmap for the SWAED volunteer management platform using L
   - Verification portal
 
 ### Week 13-14: Gamification System
-- [~] **Badge System**
+- [x] **Badge System**
   - Achievement badge creation
   - Automatic badge awarding
   - Badge display system
   - Progress tracking
 
-- [ ] **Leaderboards & Recognition**
+- [x] **Leaderboards & Recognition**
   - Volunteer leaderboards
   - Monthly recognition system
   - Social sharing features
@@ -230,7 +230,7 @@ Complete development roadmap for the SWAED volunteer management platform using L
 **Priority:** Low
 **Status:** 🔴 NOT STARTED
 
-### Week 14-15: Analytics & Reporting
+### Week 19-20: Analytics & Reporting
 - [ ] **Dashboard Analytics**
   - Real-time statistics
   - Interactive charts and graphs
@@ -258,12 +258,33 @@ Complete development roadmap for the SWAED volunteer management platform using L
 
 ---
 
-## 🚀 Phase 7: Testing, Optimization & Deployment
+## 🌐 Phase 8: Website Enhancements
+**Duration:** 1 week  
+**Priority:** High
+**Status:** ✅ COMPLETED
+
+### Week 18: Homepage & Public Features
+- [x] **Homepage Enhancements**
+  - WhatsApp integration with floating contact button
+  - Photo gallery section showcasing volunteer activities
+  - Event browser section for upcoming opportunities
+  - Navigation updates with "Opportunities" link
+  - Clickable SwaedUAE logo redirecting to homepage
+
+- [x] **Public Page System**
+  - Static page management system
+  - FAQ, Privacy Policy, Terms of Service pages
+  - Volunteer Guide and Organization Resources pages
+  - Public layout for static pages
+
+---
+
+## 🛡️ Phase 9: Testing, Optimization & Deployment
 **Duration:** 2-3 weeks  
 **Priority:** Critical
 **Status:** 🔴 NOT STARTED
 
-### Week 16-17: Testing & Quality Assurance
+### Week 21-22: Testing & Quality Assurance
 - [ ] **Comprehensive Testing**
   - Unit test coverage
   - Feature testing

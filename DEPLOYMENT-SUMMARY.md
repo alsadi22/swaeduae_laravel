@@ -1,7 +1,7 @@
 # SwaedUAE Platform Deployment Summary
 
 **Date:** October 30, 2025  
-**Version:** 1.0  
+**Version:** 1.1  
 **Developer:** AI Assistant
 
 ## Overview
@@ -39,7 +39,16 @@ This document summarizes the features implemented and deployment steps for the S
 - Scheduled reports functionality
 - Trend analysis with interactive visualizations
 
-### 6. Documentation Updates
+### 6. Website Homepage Enhancements
+- Added WhatsApp integration with floating contact button
+- Implemented photo gallery section showcasing volunteer activities
+- Created event browser section for upcoming opportunities
+- Updated navigation with "Opportunities" link
+- Made SwaedUAE logo clickable to redirect to homepage
+- Fixed route conflicts between admin and public pages
+- Created public layout for static pages to avoid authentication requirements
+
+### 7. Documentation Updates
 - Updated FEATURES-SUMMARY document
 - Updated MISSING-FEATURES document
 
@@ -71,12 +80,15 @@ This document summarizes the features implemented and deployment steps for the S
 - `resources/views/admin/settings/index.blade.php`
 - `resources/views/admin/pages/` (multiple views)
 - `resources/views/pages/show.blade.php`
+- `resources/views/layouts/public.blade.php`
 
 ## Deployment Steps
 
 1. Run the deployment script: `./deploy-updates.sh`
 2. Verify deployment with: `php verify-deployment.php`
-3. Perform manual verification of all new features
+3. Clear all caches: `php artisan config:clear && php artisan route:clear && php artisan view:clear && php artisan cache:clear`
+4. Restart services: `sudo systemctl reload nginx && sudo systemctl restart php8.3-fpm`
+5. Perform manual verification of all new features
 
 ## Post-Deployment Verification
 
@@ -85,6 +97,8 @@ This document summarizes the features implemented and deployment steps for the S
 - Model functionality
 - New table creation
 - Field existence
+- Route accessibility
+- Static page rendering
 
 ### Manual Checks
 - Admin settings panel functionality
@@ -93,6 +107,11 @@ This document summarizes the features implemented and deployment steps for the S
 - Unique ID generation
 - Default page accessibility
 - Analytics dashboard features
+- WhatsApp integration functionality
+- Photo gallery display
+- Event browser section
+- Navigation updates
+- Logo click redirection
 
 ## Rollback Plan
 
@@ -101,7 +120,8 @@ If issues are encountered:
 1. Restore database from backup
 2. Revert code changes
 3. Clear all caches
-4. Contact development team for support
+4. Restart web services
+5. Contact development team for support
 
 ## Support
 
