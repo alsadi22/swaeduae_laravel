@@ -301,3 +301,399 @@ The SwaedUAE platform has successfully implemented the core functionality requir
 4. Performance monitoring and optimization
 5. Social media integration
 6. Advanced search and filtering
+
+---
+
+## Complete System Workflows
+
+### Volunteer Workflow (End-to-End)
+
+#### 1. Registration & Account Setup
+1. Visit https://swaeduae.ae/register
+2. Fill registration form with:
+   - Personal information (name, email, phone, date of birth)
+   - Contact details (emirate, city, address)
+   - Emergency contact information
+   - Skills and interests (optional)
+   - Transportation availability
+3. Submit form → Account created with unique ID (SV000001)
+4. Receive verification email from admin@swaeduae.ae
+5. Click verification link → Email verified
+6. Login redirects to /dashboard (Volunteer Dashboard)
+
+#### 2. Browse & Apply for Events
+1. Navigate to Dashboard → View upcoming events
+2. Click "Browse Events" → See all approved events
+3. Filter by category, date, location, or organization
+4. Click event card → View full event details
+5. Review requirements and time commitment
+6. Click "Apply" button
+7. Write application message (optional)
+8. Submit application → Status: "Pending"
+9. Receive email notification when approved/rejected
+
+#### 3. Event Participation (QR Code System)
+
+**Check-In Process:**
+1. Arrive at event location
+2. Open volunteer dashboard on mobile
+3. Navigate to "My Events" → Select approved event
+4. Click "QR Scanner" button
+5. Allow camera permissions
+6. Scan event QR code displayed at venue
+7. System validates:
+   - QR code authenticity (SHA-256 hash)
+   - QR code expiration (24-hour validity)
+   - Event status (must be "published")
+   - Location proximity (within 500 meters)
+   - Application approval status
+8. Successful check-in → Record created
+9. See confirmation: "Successfully checked in!"
+
+**Check-Out Process:**
+1. At event end, open QR scanner again
+2. Scan same QR code
+3. System calculates:
+   - Hours worked (check-out time - check-in time)
+   - Location validation
+   - Attendance completion
+4. Attendance status → "Completed"
+5. Hours added to total volunteer hours
+6. Eligible for certificate generation
+
+#### 4. Certificate Management
+1. After event completion, wait for organization verification
+2. Organization generates certificate
+3. Receive email notification
+4. Navigate to "My Certificates"
+5. View certificate details:
+   - Certificate number (e.g., CERT-2025-001234)
+   - Event name and organization
+   - Hours volunteered
+   - Issue date
+   - Verification code
+6. Actions available:
+   - **Download PDF**: Get printable certificate
+   - **Share**: Make public with shareable link
+   - **Verify**: Check certificate authenticity
+
+#### 5. Profile & Progress Tracking
+1. View profile dashboard
+2. See statistics:
+   - Total volunteer hours
+   - Events attended
+   - Certificates earned
+   - Badges unlocked
+   - Points accumulated
+3. Update profile information
+4. Manage notification preferences
+
+---
+
+### Organization Workflow (End-to-End)
+
+#### 1. Organization Registration
+1. Visit https://swaeduae.ae/organization/register
+2. Create user account
+3. Fill organization details:
+   - Organization name and legal info
+   - License number
+   - Contact information
+   - Primary contact details
+   - Address and location
+   - Description and mission
+4. Upload verification documents
+5. Submit → Status: "Pending Approval"
+6. Wait for admin review (email notification sent)
+7. Upon approval → Access granted to organization dashboard
+
+#### 2. Event Creation & Management
+1. Login → Redirect to /organization/dashboard
+2. Click "Create Event"
+3. Fill event form:
+   - Event title and description
+   - Category selection
+   - Start/end date and time
+   - Location (address + coordinates)
+   - Volunteer requirements:
+     - Min/max volunteers
+     - Required skills
+     - Age restrictions
+     - Special requirements
+   - Event image upload
+4. Save as Draft → Status: "Draft"
+5. Review and edit as needed
+6. Submit for approval → Status: "Pending"
+7. Admin reviews and approves
+8. Status changes to "Approved"
+9. Publish event → Status: "Published"
+10. Event appears in volunteer event browser
+
+#### 3. Volunteer Application Management
+1. Receive applications from volunteers
+2. Navigate to "Applications" tab
+3. View applicant details:
+   - Volunteer profile
+   - Skills and experience
+   - Application message
+   - Availability
+4. Review each application
+5. Actions:
+   - **Approve**: Volunteer gets confirmation email
+   - **Reject**: Volunteer notified with reason
+   - **Request More Info**: Send message to volunteer
+6. Track approved volunteers count vs. capacity
+
+#### 4. Event Day Operations
+1. Generate event QR code (auto-generated upon event creation)
+2. Display QR code at event venue:
+   - Print large format poster
+   - Show on tablet/screen
+   - Multiple scanning stations for large events
+3. QR code contains:
+   - Event ID
+   - Application ID reference
+   - Timestamp
+   - Security hash
+4. Monitor real-time check-ins:
+   - Dashboard shows live attendance
+   - View who's checked in/out
+   - See location validation status
+5. Handle issues:
+   - Manual check-in for QR failures
+   - Verify volunteer identity
+   - Adjust hours if needed
+
+#### 5. Post-Event & Certificate Generation
+1. After event ends, review attendance records
+2. Navigate to "Attendance" → Select completed event
+3. Verify hours for each volunteer:
+   - Check location validation
+   - Review check-in/out times
+   - Approve or adjust hours
+4. Mark attendance as "Verified"
+5. Generate certificates:
+   - Bulk generation for all attendees
+   - Individual certificate generation
+   - Custom certificates for special roles
+6. System creates PDF certificates with:
+   - Volunteer name and ID
+   - Event details
+   - Hours volunteered
+   - Organization seal
+   - Verification code
+   - QR code for validation
+7. Volunteers receive email with certificate link
+
+#### 6. Communication Tools
+1. **Announcements**:
+   - Create event updates
+   - Send to all approved volunteers
+   - Schedule advance notifications
+2. **Messaging**:
+   - Direct message individual volunteers
+   - Group messaging
+   - Automated reminders
+3. **Emergency Communications**:
+   - Priority level settings
+   - Instant SMS/email alerts
+   - Event cancellation notices
+
+---
+
+### Admin Workflow (End-to-End)
+
+#### 1. System Access & Dashboard
+1. Login at https://swaeduae.ae/login
+2. Redirect to /admin (Admin Dashboard)
+3. View system overview:
+   - Total users (volunteers, organizations, admins)
+   - Active events
+   - Pending approvals
+   - Recent registrations
+   - System health metrics
+
+#### 2. User Management
+1. Navigate to "Users" section
+2. View all users with filters:
+   - Role (Volunteer, Organization, Admin)
+   - Status (Active, Inactive, Suspended)
+   - Email verification status
+   - Registration date
+3. User actions:
+   - **View Profile**: See complete user information
+   - **Edit**: Update user details
+   - **Assign Role**: Change user permissions
+   - **Suspend/Activate**: Control account access
+   - **Delete**: Remove user (soft delete)
+   - **Reset Password**: Send password reset link
+   - **Verify Email**: Manual verification if needed
+4. Export user data (CSV, Excel, PDF)
+
+#### 3. Organization Approval Process
+1. Navigate to "Organizations" → "Pending Approval"
+2. View organization details:
+   - Legal information
+   - License number verification
+   - Contact information
+   - Uploaded documents
+   - Primary contact details
+3. Verify authenticity:
+   - Check license validity
+   - Review documents
+   - Contact verification
+4. Decision:
+   - **Approve**: Organization gets access
+   - **Reject**: Send reason, can reapply
+   - **Request More Info**: Ask for additional documents
+5. Approved organizations can create events
+
+#### 4. Event Moderation
+1. Navigate to "Events" → "Pending Approval"
+2. Review event submissions:
+   - Event content appropriateness
+   - Organization credibility
+   - Date/time conflicts
+   - Capacity reasonableness
+   - Location verification
+3. Actions:
+   - **Approve**: Event goes live
+   - **Reject**: Notify organization with feedback
+   - **Request Changes**: Ask for modifications
+4. Monitor published events:
+   - View analytics
+   - Handle reported issues
+   - Emergency event cancellation
+
+#### 5. Certificate Oversight
+1. View all issued certificates
+2. Certificate validation:
+   - Verify authenticity
+   - Check hours accuracy
+   - Review issuing organization
+3. Actions:
+   - **Revoke**: Cancel invalid certificates
+   - **Reissue**: Generate replacement
+   - **Verify**: Manual verification requests
+4. Export certificate reports
+
+#### 6. System Configuration
+1. **Settings Management**:
+   - Update site logo and branding
+   - Configure email templates
+   - Set system-wide defaults
+   - Manage API credentials
+2. **Static Pages**:
+   - Edit FAQ, Privacy Policy, Terms
+   - Create new information pages
+   - Manage page SEO settings
+3. **Analytics & Reports**:
+   - Generate custom reports
+   - Export data for analysis
+   - Schedule automated reports
+   - View trend analysis
+4. **Badge Management**:
+   - Create achievement badges
+   - Set earning criteria
+   - Assign badges to volunteers
+
+#### 7. Security & Monitoring
+1. Review security logs
+2. Monitor failed login attempts
+3. Check API rate limiting status
+4. View system performance metrics
+5. Manage user permissions and roles
+6. Handle security incidents
+
+---
+
+## Technical Implementation Details
+
+### QR Code System Technical Specs
+```
+Format: event_id:application_id:timestamp:hash
+Example: 42:156:1730304000:a3f5c8d9e2b1f4a6c7d8e9f0a1b2c3d4
+
+Hash Generation:
+SHA-256(event_id + ':' + application_id + ':' + timestamp + ':' + APP_KEY)
+
+Validation Rules:
+- Hash must match expected value
+- Timestamp within 24 hours
+- Event must be published
+- Application must be approved
+- User must be within 500m of event location
+
+Location Verification:
+- Uses Haversine formula
+- Earth radius: 6371 km
+- Max acceptable distance: 0.5 km (500 meters)
+```
+
+### Hours Calculation System
+```
+Check-in Time: Recorded when QR scanned first time
+Check-out Time: Recorded when QR scanned second time
+
+Hours Worked = (Check-out Time - Check-in Time) / 60 minutes
+Rounded to: 2 decimal places
+
+Example:
+Check-in: 2025-10-30 09:00:00
+Check-out: 2025-10-30 13:30:00
+Hours: 4.50
+
+Updates:
+- Attendance.hours_worked
+- User.total_volunteer_hours (incremented)
+- Application.hours_completed
+```
+
+### Certificate Generation Process
+```
+1. Trigger: Organization marks attendance as verified
+2. Data Collection:
+   - Volunteer name and ID
+   - Event title and details
+   - Organization info
+   - Hours worked (from attendance)
+   - Completion date
+3. Certificate Number Generation:
+   Format: CERT-YYYY-NNNNNN
+   Example: CERT-2025-000142
+4. PDF Generation:
+   - Template: resources/views/certificates/template.blade.php
+   - Engine: DomPDF
+   - Paper: A4 Landscape
+   - DPI: 150
+5. Verification Code:
+   - 12-character alphanumeric
+   - Unique per certificate
+   - Used for public verification
+6. Storage:
+   - Path: storage/app/certificates/
+   - Filename: {certificate_number}.pdf
+7. Notification:
+   - Email sent to volunteer
+   - Contains download link
+   - Verification instructions
+```
+
+### Email Notification System
+```
+Provider: Zoho Mail
+SMTP: smtp.zoho.com:587
+Encryption: TLS
+
+Notification Types:
+1. Welcome Email (registration)
+2. Email Verification
+3. Application Status Updates
+4. Event Reminders
+5. Certificate Issued
+6. Announcements
+7. Password Reset
+
+Email Templates: resources/views/emails/
+Queue: Laravel Queue System (database driver)
+```
