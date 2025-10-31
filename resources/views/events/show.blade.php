@@ -1,346 +1,157 @@
 @extends('layouts.app')
 
-@section('title', $event->title)
-
 @section('content')
-<div class="min-h-screen bg-gray-50">
-    <!-- Event Header -->
-    <div class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <nav class="flex" aria-label="Breadcrumb">
-                        <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                            <li class="inline-flex items-center">
-                                <a href="{{ route('events.index') }}" class="text-gray-700 hover:text-blue-600">
-                                    <i class="fas fa-calendar-alt mr-2"></i>Events
-                                </a>
-                            </li>
-                            <li>
-                                <div class="flex items-center">
-                                    <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
-                                    <span class="text-gray-500">{{ Str::limit($event->title, 50) }}</span>
-                                </div>
-                            </li>
-                        </ol>
-                    </nav>
-                </div>
+<div class="py-12">
+    <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <!-- Back Button -->
+        <a href="{{ route('events.index') }}" class="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+            {{ __('Back to Events') }}
+        </a>
+
+        <!-- Event Header -->
+        <div class="bg-white rounded-lg shadow overflow-hidden mb-6">
+            <div class="h-80 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                <svg class="w-32 h-32 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h18M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+            </div>
+
+            <div class="p-8">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ $event->title ?? 'Event Title' }}</h1>
                 
-                @auth
-                    @if(auth()->user()?->hasRole(['admin', 'super-admin']) || 
-                        (auth()->user()?->hasRole(['organization-manager', 'organization-staff']) && 
-                         auth()->user()?->organizations->contains($event->organization_id)))
-                        <div class="flex space-x-2">
-                            <a href="{{ route('organization.events.edit', $event) }}" 
-                               class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200">
-                                <i class="fas fa-edit mr-2"></i>Edit Event
-                            </a>
-                        </div>
-                    @endif
-                @endauth
+                <div class="flex items-center gap-6 mb-6">
+                    <div>
+                        <p class="text-gray-600 text-sm">{{ __('Organized by') }}</p>
+                        <p class="text-xl font-semibold text-gray-900">{{ $event->organization->name ?? 'Organization' }}</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 text-sm">{{ __('Category') }}</p>
+                        <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                            {{ $event->category ?? 'General' }}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Event Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 py-6 border-t border-gray-200">
+                    <div>
+                        <p class="text-gray-600 text-sm">{{ __('Date & Time') }}</p>
+                        <p class="text-lg font-semibold text-gray-900">
+                            {{ $event->start_date ? $event->start_date->format('M d, Y h:i A') : 'TBA' }}
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 text-sm">{{ __('Duration') }}</p>
+                        <p class="text-lg font-semibold text-gray-900">{{ $event->duration ?? '0' }} {{ __('hours') }}</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 text-sm">{{ __('Volunteers Needed') }}</p>
+                        <p class="text-lg font-semibold text-gray-900">{{ $event->volunteers_needed ?? 0 }}</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 text-sm">{{ __('Volunteers Signed Up') }}</p>
+                        <p class="text-lg font-semibold text-gray-900">{{ $event->applications_count ?? 0 }}</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Main Content -->
-            <div class="lg:col-span-2">
-                <!-- Event Image -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
-                    <div class="h-64 md:h-96 relative">
-                        @if($event->image)
-                            <img src="{{ Storage::url($event->image) }}" alt="{{ $event->title }}" class="w-full h-full object-cover">
-                        @else
-                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-400 to-purple-500">
-                                <i class="fas fa-hands-helping text-white text-6xl"></i>
-                            </div>
-                        @endif
-                        
-                        <!-- Status Badge -->
-                        <div class="absolute top-4 right-4">
-                            @if($event->status === 'published')
-                                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">Published</span>
-                            @elseif($event->status === 'pending')
-                                <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium">Pending Approval</span>
-                            @elseif($event->status === 'completed')
-                                <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">Completed</span>
-                            @endif
-                        </div>
-
-                        <!-- Featured Badge -->
-                        @if($event->is_featured)
-                            <div class="absolute top-4 left-4">
-                                <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                                    <i class="fas fa-star mr-1"></i>Featured
-                                </span>
-                            </div>
-                        @endif
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Description -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">{{ __('About This Event') }}</h2>
+                    <div class="prose prose-sm max-w-none text-gray-700">
+                        {{ $event->description ?? 'No description available.' }}
                     </div>
                 </div>
 
-                <!-- Event Details -->
-                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                    <div class="flex items-center justify-between mb-4">
-                        <h1 class="text-3xl font-bold text-gray-900">{{ $event->title }}</h1>
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">{{ $event->category }}</span>
-                    </div>
+                <!-- Requirements -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">{{ __('Requirements') }}</h2>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-gray-700">{{ $event->requirements ?? 'No specific requirements' }}</span>
+                        </li>
+                    </ul>
+                </div>
 
-                    <!-- Event Meta -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-calendar text-blue-500 mr-3"></i>
-                            <div>
-                                <div class="font-medium">{{ $event->start_date->format('l, F j, Y') }}</div>
-                                <div class="text-sm">{{ $event->start_time }} - {{ $event->end_time }}</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-map-marker-alt text-red-500 mr-3"></i>
-                            <div>
-                                <div class="font-medium">{{ $event->location }}</div>
-                                <div class="text-sm">{{ $event->city }}, {{ $event->emirate }}</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-building text-green-500 mr-3"></i>
-                            <div>
-                                <div class="font-medium">{{ $event->organization->name }}</div>
-                                <div class="text-sm">Verified Organization</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-clock text-purple-500 mr-3"></i>
-                            <div>
-                                <div class="font-medium">{{ $event->volunteer_hours }} Hours</div>
-                                <div class="text-sm">Volunteer Time</div>
-                            </div>
+                <!-- Location -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">{{ __('Location') }}</h2>
+                    <div class="flex items-start gap-4">
+                        <svg class="w-6 h-6 text-gray-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        </svg>
+                        <div>
+                            <p class="text-lg font-semibold text-gray-900">{{ $event->location ?? 'Location TBA' }}</p>
+                            <p class="text-gray-600">{{ $event->address ?? 'Full address not provided' }}</p>
                         </div>
                     </div>
-
-                    <!-- Tags -->
-                    @if($event->tags && count($event->tags) > 0)
-                        <div class="mb-6">
-                            <h3 class="text-sm font-medium text-gray-700 mb-2">Tags</h3>
-                            <div class="flex flex-wrap gap-2">
-                                @foreach($event->tags as $tag)
-                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs">{{ $tag }}</span>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-
-                    <!-- Description -->
-                    <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">About This Event</h3>
-                        <div class="prose max-w-none text-gray-700">
-                            {!! nl2br(e($event->description)) !!}
-                        </div>
-                    </div>
-
-                    <!-- Requirements -->
-                    @if($event->requirements)
-                        <div class="mb-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Requirements</h3>
-                            <div class="prose max-w-none text-gray-700">
-                                {!! nl2br(e($event->requirements)) !!}
-                            </div>
-                        </div>
-                    @endif
-
-                    <!-- Skills Required -->
-                    @if($event->skills_required && count($event->skills_required) > 0)
-                        <div class="mb-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Skills Required</h3>
-                            <div class="flex flex-wrap gap-2">
-                                @foreach($event->skills_required as $skill)
-                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">{{ $skill }}</span>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-
-                    <!-- Gallery -->
-                    @if($event->gallery && count($event->gallery) > 0)
-                        <div class="mb-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Gallery</h3>
-                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                @foreach($event->gallery as $image)
-                                    <img src="{{ Storage::url($image) }}" alt="Event gallery" 
-                                         class="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-75 transition duration-200"
-                                         onclick="openImageModal('{{ Storage::url($image) }}')">
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
                 </div>
             </div>
 
             <!-- Sidebar -->
-            <div class="lg:col-span-1">
+            <div class="lg:col-span-1 space-y-6">
                 <!-- Application Card -->
-                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Event Information</h3>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">{{ __('Ready to Volunteer?') }}</h3>
                     
-                    <!-- Volunteer Spots -->
-                    <div class="mb-4">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-gray-600">Available Spots</span>
-                            <span class="font-semibold text-gray-900">{{ $event->available_spots }} / {{ $event->max_volunteers }}</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-blue-600 h-2 rounded-full" style="width: 60%"></div>
-                        </div>
-                    </div>
-
-                    <!-- Age Requirements -->
-                    @if($event->min_age || $event->max_age)
-                        <div class="mb-4">
-                            <span class="text-gray-600">Age Requirement</span>
-                            <div class="font-semibold text-gray-900">
-                                @if($event->min_age && $event->max_age)
-                                    {{ $event->min_age }} - {{ $event->max_age }} years
-                                @elseif($event->min_age)
-                                    {{ $event->min_age }}+ years
-                                @else
-                                    Up to {{ $event->max_age }} years
-                                @endif
-                            </div>
-                        </div>
-                    @endif
-
-                    <!-- Application Deadline -->
-                    @if($event->application_deadline)
-                        <div class="mb-4">
-                            <span class="text-gray-600">Application Deadline</span>
-                            <div class="font-semibold text-gray-900">{{ $event->application_deadline->format('M j, Y') }}</div>
-                        </div>
-                    @endif
-
-                    <!-- Application Button -->
                     @auth
-                        @if(auth()->user()?->hasRole('volunteer'))
-                            @php
-                                $userApplication = $event->applications()->where('user_id', auth()->id())->first();
-                            @endphp
-                            
-                            @if($userApplication)
-                                <div class="text-center">
-                                    @if($userApplication->status === 'pending')
-                                        <div class="bg-yellow-100 text-yellow-800 px-4 py-3 rounded-lg mb-3">
-                                            <i class="fas fa-clock mr-2"></i>Application Pending
-                                        </div>
-                                    @elseif($userApplication->status === 'approved')
-                                        <div class="bg-green-100 text-green-800 px-4 py-3 rounded-lg mb-3">
-                                            <i class="fas fa-check-circle mr-2"></i>Application Approved
-                                        </div>
-                                    @elseif($userApplication->status === 'rejected')
-                                        <div class="bg-red-100 text-red-800 px-4 py-3 rounded-lg mb-3">
-                                            <i class="fas fa-times-circle mr-2"></i>Application Rejected
-                                        </div>
-                                    @endif
-                                    <a href="{{ route('volunteer.applications.show', $userApplication) }}" 
-                                       class="block w-full bg-blue-600 text-white text-center py-3 rounded-lg hover:bg-blue-700 transition duration-200">
-                                        View Application
-                                    </a>
-                                </div>
-                            @elseif($event->applications_open)
-                                <a href="{{ route('volunteer.events.apply', $event) }}" 
-                                   class="block w-full bg-green-600 text-white text-center py-3 rounded-lg hover:bg-green-700 transition duration-200">
-                                    <i class="fas fa-hand-paper mr-2"></i>Apply to Volunteer
-                                </a>
-                            @elseif($event->is_full)
-                                <div class="bg-gray-100 text-gray-600 text-center py-3 rounded-lg">
-                                    <i class="fas fa-users mr-2"></i>Event is Full
-                                </div>
-                            @elseif($event->application_deadline && $event->application_deadline < now())
-                                <div class="bg-gray-100 text-gray-600 text-center py-3 rounded-lg">
-                                    <i class="fas fa-calendar-times mr-2"></i>Applications Closed
-                                </div>
-                            @else
-                                <div class="bg-gray-100 text-gray-600 text-center py-3 rounded-lg">
-                                    <i class="fas fa-info-circle mr-2"></i>Applications Not Open
-                                </div>
-                            @endif
+                        @if(auth()->user()->hasApplied($event->id ?? null))
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                                <p class="text-green-800 font-semibold">{{ __('✓ You Applied') }}</p>
+                                <p class="text-sm text-green-700 mt-1">{{ __('Waiting for approval') }}</p>
+                            </div>
+                        @else
+                            <button class="w-full px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
+                                {{ __('Apply Now') }}
+                            </button>
                         @endif
                     @else
-                        <a href="{{ route('login') }}" 
-                           class="block w-full bg-blue-600 text-white text-center py-3 rounded-lg hover:bg-blue-700 transition duration-200">
-                            Login to Apply
+                        <a href="{{ route('login') }}" class="block w-full px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition text-center">
+                            {{ __('Sign In to Apply') }}
                         </a>
                     @endauth
+
+                    <button class="w-full mt-3 px-6 py-2 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition">
+                        {{ __('Save Event') }}
+                    </button>
                 </div>
 
-                <!-- Contact Information -->
-                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
-                    
-                    <div class="space-y-3">
-                        <div class="flex items-center">
-                            <i class="fas fa-user text-gray-400 mr-3"></i>
-                            <span class="text-gray-700">{{ $event->contact_person }}</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-envelope text-gray-400 mr-3"></i>
-                            <a href="mailto:{{ $event->contact_email }}" class="text-blue-600 hover:text-blue-800">{{ $event->contact_email }}</a>
-                        </div>
-                        @if($event->contact_phone)
-                            <div class="flex items-center">
-                                <i class="fas fa-phone text-gray-400 mr-3"></i>
-                                <a href="tel:{{ $event->contact_phone }}" class="text-blue-600 hover:text-blue-800">{{ $event->contact_phone }}</a>
-                            </div>
-                        @endif
+                <!-- Share Card -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">{{ __('Share This Event') }}</h3>
+                    <div class="space-y-2">
+                        <button class="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition text-sm font-medium">
+                            {{ __('Share on Facebook') }}
+                        </button>
+                        <button class="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition text-sm font-medium">
+                            {{ __('Share on Twitter') }}
+                        </button>
+                        <button class="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition text-sm font-medium">
+                            {{ __('Share on WhatsApp') }}
+                        </button>
                     </div>
                 </div>
 
-                <!-- Location Map -->
-                @if($event->latitude && $event->longitude)
-                    <div class="bg-white rounded-lg shadow-md p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Location</h3>
-                        <div class="mb-3">
-                            <div class="font-medium text-gray-900">{{ $event->location }}</div>
-                            <div class="text-gray-600 text-sm">{{ $event->address }}</div>
-                        </div>
-                        <div class="h-48 bg-gray-200 rounded-lg flex items-center justify-center">
-                            <div class="text-center text-gray-500">
-                                <i class="fas fa-map-marked-alt text-2xl mb-2"></i>
-                                <div class="text-sm">Map integration coming soon</div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
+                <!-- Contact Card -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">{{ __('Questions?') }}</h3>
+                    <p class="text-gray-600 text-sm mb-4">{{ __('Contact the organizer directly.') }}</p>
+                    <a href="mailto:{{ $event->organization->email ?? '#' }}" class="block w-full px-4 py-2 bg-gray-100 text-gray-900 text-center font-medium rounded-lg hover:bg-gray-200 transition">
+                        {{ __('Send Email') }}
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Image Modal -->
-<div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 flex items-center justify-center p-4">
-    <div class="relative max-w-4xl max-h-full">
-        <img id="modalImage" src="" alt="Gallery image" class="max-w-full max-h-full object-contain">
-        <button onclick="closeImageModal()" class="absolute top-4 right-4 text-white text-2xl hover:text-gray-300">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-</div>
 @endsection
-
-@push('scripts')
-<script>
-function openImageModal(imageSrc) {
-    document.getElementById('modalImage').src = imageSrc;
-    document.getElementById('imageModal').classList.remove('hidden');
-}
-
-function closeImageModal() {
-    document.getElementById('imageModal').classList.add('hidden');
-}
-
-// Close modal when clicking outside the image
-document.getElementById('imageModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeImageModal();
-    }
-});
-</script>
-@endpush

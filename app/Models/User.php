@@ -169,6 +169,48 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get social auth providers linked to user.
+     */
+    public function socialAuthProviders(): HasMany
+    {
+        return $this->hasMany(SocialAuthProvider::class);
+    }
+
+    /**
+     * Get volunteer groups the user belongs to.
+     */
+    public function groups(): BelongsToMany
+    {
+        return $this->belongsToMany(VolunteerGroup::class, 'group_memberships')
+                    ->withPivot(['role', 'joined_at'])
+                    ->withTimestamps();
+    }
+
+    /**
+     * Get activities for the user.
+     */
+    public function activities(): HasMany
+    {
+        return $this->hasMany(Activity::class);
+    }
+
+    /**
+     * Get groups created by the user.
+     */
+    public function groupsCreated(): HasMany
+    {
+        return $this->hasMany(VolunteerGroup::class, 'created_by');
+    }
+
+    /**
+     * Get social shares for the user.
+     */
+    public function socialShares(): HasMany
+    {
+        return $this->hasMany(SocialShare::class);
+    }
+
+    /**
      * Get the user's age.
      */
     public function getAgeAttribute()

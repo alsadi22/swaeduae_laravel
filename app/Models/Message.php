@@ -3,18 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Message extends Model
 {
-    use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'sender_id',
         'recipient_id',
-        'event_id',
-        'organization_id',
         'content',
+        'message_type',
+        'media_url',
+        'media_type',
         'is_read',
         'read_at',
     ];
@@ -22,28 +25,33 @@ class Message extends Model
     protected $casts = [
         'is_read' => 'boolean',
         'read_at' => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
     ];
 
-    // Relationships
-    public function sender()
+    public function sender(): BelongsTo
     {
         return $this->belongsTo(User::class, 'sender_id');
     }
 
-    public function recipient()
+    public function recipient(): BelongsTo
     {
         return $this->belongsTo(User::class, 'recipient_id');
     }
 
-    public function event()
+    public function scopeUnread($query)
     {
-        return $this->belongsTo(Event::class);
+        return $query->where('is_read', false);
     }
 
-    public function organization()
+    public function scopeRecent($query)
     {
-        return $this->belongsTo(Organization::class);
+        return $query->orderBy('created_at', 'desc');
+    }
+
+    public function markAsRead()
+    {
+        $this->update([
+            'is_read' => true,
+            'read_at' => now(),
+        ]);
     }
 }

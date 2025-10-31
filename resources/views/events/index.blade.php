@@ -1,197 +1,141 @@
 @extends('layouts.app')
 
-@section('title', 'Volunteer Events')
-
 @section('content')
-<div class="min-h-screen bg-gray-50">
-    <!-- Hero Section -->
-    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h1 class="text-4xl font-bold mb-4">Volunteer Opportunities</h1>
-                <p class="text-xl opacity-90">Make a difference in your community</p>
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <!-- Header with Search and Filter -->
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">{{ __('Volunteer Events') }}</h1>
+                    <p class="text-gray-600 mt-2">{{ __('Discover opportunities to make a difference') }}</p>
+                </div>
+                @auth
+                    @if(auth()->user()->hasRole('organization'))
+                        <a href="{{ route('events.create') }}" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition">
+                            {{ __('Create Event') }}
+                        </a>
+                    @endif
+                @endauth
             </div>
-        </div>
-    </div>
 
-    <!-- Search and Filters -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-            <form method="GET" action="{{ route('events.index') }}" class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <!-- Search -->
+            <!-- Search and Filter Bar -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <form action="{{ route('events.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                        <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Search Events</label>
-                        <input type="text" name="search" id="search" value="{{ request('search') }}" 
-                               placeholder="Search by title or description..."
-                               class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Search') }}</label>
+                        <input type="text" name="search" placeholder="Event name or description..." 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                               value="{{ request('search') }}">
                     </div>
 
-                    <!-- Category Filter -->
                     <div>
-                        <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                        <select name="category" id="category" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                            <option value="">All Categories</option>
-                            <option value="Education" {{ request('category') == 'Education' ? 'selected' : '' }}>Education</option>
-                            <option value="Environment" {{ request('category') == 'Environment' ? 'selected' : '' }}>Environment</option>
-                            <option value="Health" {{ request('category') == 'Health' ? 'selected' : '' }}>Health</option>
-                            <option value="Community" {{ request('category') == 'Community' ? 'selected' : '' }}>Community</option>
-                            <option value="Sports" {{ request('category') == 'Sports' ? 'selected' : '' }}>Sports</option>
-                            <option value="Arts & Culture" {{ request('category') == 'Arts & Culture' ? 'selected' : '' }}>Arts & Culture</option>
-                            <option value="Technology" {{ request('category') == 'Technology' ? 'selected' : '' }}>Technology</option>
-                            <option value="Elderly Care" {{ request('category') == 'Elderly Care' ? 'selected' : '' }}>Elderly Care</option>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Category') }}</label>
+                        <select name="category" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">{{ __('All Categories') }}</option>
+                            <option value="education">{{ __('Education') }}</option>
+                            <option value="environment">{{ __('Environment') }}</option>
+                            <option value="health">{{ __('Health') }}</option>
+                            <option value="community">{{ __('Community') }}</option>
                         </select>
                     </div>
 
-                    <!-- Emirate Filter -->
                     <div>
-                        <label for="emirate" class="block text-sm font-medium text-gray-700 mb-1">Emirate</label>
-                        <select name="emirate" id="emirate" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                            <option value="">All Emirates</option>
-                            <option value="Abu Dhabi" {{ request('emirate') == 'Abu Dhabi' ? 'selected' : '' }}>Abu Dhabi</option>
-                            <option value="Dubai" {{ request('emirate') == 'Dubai' ? 'selected' : '' }}>Dubai</option>
-                            <option value="Sharjah" {{ request('emirate') == 'Sharjah' ? 'selected' : '' }}>Sharjah</option>
-                            <option value="Ajman" {{ request('emirate') == 'Ajman' ? 'selected' : '' }}>Ajman</option>
-                            <option value="Umm Al Quwain" {{ request('emirate') == 'Umm Al Quwain' ? 'selected' : '' }}>Umm Al Quwain</option>
-                            <option value="Ras Al Khaimah" {{ request('emirate') == 'Ras Al Khaimah' ? 'selected' : '' }}>Ras Al Khaimah</option>
-                            <option value="Fujairah" {{ request('emirate') == 'Fujairah' ? 'selected' : '' }}>Fujairah</option>
-                        </select>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Location') }}</label>
+                        <input type="text" name="location" placeholder="City or region..." 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                               value="{{ request('location') }}">
                     </div>
 
-                    <!-- Status Filter (for authenticated users) -->
-                    @auth
-                        @if(auth()->user()?->hasRole(['admin', 'super-admin', 'organization-manager']))
-                        <div>
-                            <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                            <select name="status" id="status" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                <option value="">All Status</option>
-                                <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>Published</option>
-                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                                <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Draft</option>
-                                <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Completed</option>
-                            </select>
-                        </div>
-                        @endif
-                    @endauth
-                </div>
-
-                <div class="flex justify-between items-center">
-                    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition duration-200">
-                        <i class="fas fa-search mr-2"></i>Search Events
-                    </button>
-                    <a href="{{ route('events.index') }}" class="text-gray-600 hover:text-gray-800">Clear Filters</a>
-                </div>
-            </form>
+                    <div class="flex items-end gap-2">
+                        <button type="submit" class="flex-1 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition">
+                            {{ __('Search') }}
+                        </button>
+                        <a href="{{ route('events.index') }}" class="px-4 py-2 bg-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-400 transition">
+                            {{ __('Clear') }}
+                        </a>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!-- Events Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse($events as $event)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-200">
+                <div class="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
                     <!-- Event Image -->
-                    <div class="h-48 bg-gray-200 relative">
-                        @if($event->image)
-                            <img src="{{ Storage::url($event->image) }}" alt="{{ $event->title }}" class="w-full h-full object-cover">
-                        @else
-                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-400 to-purple-500">
-                                <i class="fas fa-hands-helping text-white text-4xl"></i>
-                            </div>
-                        @endif
-                        
-                        <!-- Status Badge -->
-                        <div class="absolute top-2 right-2">
-                            @if($event->status === 'published')
-                                <span class="bg-green-500 text-white px-2 py-1 rounded-full text-xs">Published</span>
-                            @elseif($event->status === 'pending')
-                                <span class="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs">Pending</span>
-                            @elseif($event->status === 'completed')
-                                <span class="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">Completed</span>
-                            @endif
-                        </div>
-
-                        <!-- Featured Badge -->
-                        @if($event->is_featured)
-                            <div class="absolute top-2 left-2">
-                                <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs">
-                                    <i class="fas fa-star mr-1"></i>Featured
-                                </span>
-                            </div>
-                        @endif
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h18M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
                     </div>
 
-                    <!-- Event Content -->
+                    <!-- Event Details -->
                     <div class="p-6">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">{{ $event->category }}</span>
-                            <span class="text-gray-500 text-sm">{{ $event->volunteer_hours }}h</span>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $event->title ?? 'Event' }}</h3>
+                        
+                        <p class="text-gray-600 text-sm mb-4">{{ Str::limit($event->description ?? '', 100) }}</p>
+
+                        <!-- Event Meta -->
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center text-gray-600 text-sm">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                </svg>
+                                {{ $event->location ?? 'TBA' }}
+                            </div>
+
+                            <div class="flex items-center text-gray-600 text-sm">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                {{ $event->start_date ? $event->start_date->format('M d, Y') : 'Date TBA' }}
+                            </div>
+
+                            <div class="flex items-center text-gray-600 text-sm">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292m0-5.292H6.462m5.538 0H18m0 5.338A6 6 0 1012 4.354"></path>
+                                </svg>
+                                {{ $event->volunteers_needed ?? 0 }} {{ __('volunteers needed') }}
+                            </div>
                         </div>
 
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ $event->title }}</h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">{{ Str::limit($event->description, 120) }}</p>
-
-                        <!-- Event Details -->
-                        <div class="space-y-2 mb-4">
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-calendar mr-2 text-blue-500"></i>
-                                {{ $event->start_date->format('M d, Y') }}
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-map-marker-alt mr-2 text-red-500"></i>
-                                {{ $event->city }}, {{ $event->emirate }}
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-building mr-2 text-green-500"></i>
-                                {{ $event->organization->name }}
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-users mr-2 text-purple-500"></i>
-                                {{ $event->available_spots }} spots available
-                            </div>
+                        <!-- Category Badge -->
+                        <div class="mb-4">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                {{ $event->category ?? 'General' }}
+                            </span>
                         </div>
 
                         <!-- Action Buttons -->
-                        <div class="flex space-x-2">
-                            <a href="{{ route('events.show', $event) }}" 
-                               class="flex-1 bg-blue-600 text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200">
-                                View Details
+                        <div class="flex gap-2">
+                            <a href="{{ route('events.show', $event->id ?? '#') }}" class="flex-1 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition text-center">
+                                {{ __('View Details') }}
                             </a>
                             @auth
-                                @if(auth()->user()?->hasRole('volunteer') && $event->applications_open)
-                                    <a href="{{ route('volunteer.events.apply', $event) }}" 
-                                       class="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition duration-200">
-                                        <i class="fas fa-hand-paper"></i>
-                                    </a>
-                                @endif
+                                <button class="px-4 py-2 border border-blue-600 text-blue-600 font-medium rounded-lg hover:bg-blue-50 transition">
+                                    {{ __('Save') }}
+                                </button>
                             @endauth
                         </div>
                     </div>
                 </div>
             @empty
-                <div class="col-span-full text-center py-12">
-                    <i class="fas fa-search text-gray-400 text-6xl mb-4"></i>
-                    <h3 class="text-xl font-semibold text-gray-600 mb-2">No Events Found</h3>
-                    <p class="text-gray-500">Try adjusting your search criteria or check back later for new opportunities.</p>
+                <div class="col-span-3 text-center py-12">
+                    <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <p class="text-gray-600 text-lg">{{ __('No events found. Try adjusting your filters.') }}</p>
                 </div>
             @endforelse
         </div>
 
         <!-- Pagination -->
-        @if($events->hasPages())
+        @if($events instanceof \Illuminate\Pagination\Paginator)
             <div class="mt-8">
-                {{ $events->appends(request()->query())->links() }}
+                {{ $events->links() }}
             </div>
         @endif
     </div>
 </div>
 @endsection
-
-@push('styles')
-<style>
-.line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-</style>
-@endpush

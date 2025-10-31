@@ -60,6 +60,48 @@ class Kernel extends ConsoleKernel
             ->dailyAt('08:00')
             ->name('scheduled-reports')
             ->withoutOverlapping();
+        
+        // Aggregate analytics - Every 30 minutes
+        $schedule->call(function () {
+            \Artisan::call('analytics:aggregate');
+        })->everyThirtyMinutes()
+         ->name('analytics-aggregation')
+         ->withoutOverlapping();
+        
+        // Process analytics alerts - Every 5 minutes
+        $schedule->call(function () {
+            \Artisan::call('analytics:check-alerts');
+        })->everyFiveMinutes()
+         ->name('analytics-alerts')
+         ->withoutOverlapping();
+        
+        // Send digest notifications - Daily at 9 AM
+        $schedule->call(function () {
+            \Artisan::call('notifications:send-digests');
+        })->dailyAt('09:00')
+         ->name('digest-notifications')
+         ->withoutOverlapping();
+        
+        // Process webhook retries - Every 10 minutes
+        $schedule->call(function () {
+            \Artisan::call('webhooks:retry-failed');
+        })->everyTenMinutes()
+         ->name('webhook-retries')
+         ->withoutOverlapping();
+        
+        // Update churn predictions - Daily at 1 AM
+        $schedule->call(function () {
+            \Artisan::call('predictions:update-churn');
+        })->dailyAt('01:00')
+         ->name('update-churn')
+         ->withoutOverlapping();
+        
+        // Calculate user engagement - Hourly
+        $schedule->call(function () {
+            \Artisan::call('engagement:calculate-metrics');
+        })->hourly()
+         ->name('engagement-metrics')
+         ->withoutOverlapping();
     }
 
     /**
