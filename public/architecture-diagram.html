@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwaedUAE Architecture & User Flow Diagrams</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .diagram-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .diagram-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .diagram-icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            overflow: auto;
+        }
+
+        .diagram-description {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .diagram-section {
+                padding: 15px;
+            }
+
+            .mermaid {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗺️ SwaedUAE Platform Architecture</h1>
+            <p>Complete system diagrams and user flows</p>
+        </div>
+
+        <!-- WEBSITE STRUCTURE DIAGRAM -->
+        <div class="diagram-section">
+            <div class="diagram-title">
+                <span class="diagram-icon">🏗️</span>
+                Website Structure & Navigation
+            </div>
+            <div class="mermaid">
+                graph TD
+                    Home["🏠 Homepage"]
+                    Public["📄 Public Pages"]
+                    Auth["🔐 Authentication"]
+                    Volunteer["👤 Volunteer Portal"]
+                    Organization["🏢 Organization Portal"]
+                    Admin["⚙️ Admin Panel"]
+                    API["🔌 API Services"]
+
+                    Home --> About["About Us"]
+                    Home --> Contact["Contact Us"]
+                    Home --> Events["Event Catalog"]
+                    Home --> Blog["Blog"]
+
+                    Public --> FAQ["FAQ"]
+                    Public --> Privacy["Privacy Policy"]
+                    Public --> Terms["Terms of Service"]
+                    Public --> Guide["Volunteer Guide"]
+
+                    Auth --> Login["Login"]
+                    Auth --> Register["Register"]
+                    Auth --> Reset["Password Reset"]
+
+                    Volunteer --> Dashboard["Dashboard"]
+                    Volunteer --> Browse["Browse Events"]
+                    Volunteer --> Apply["Apply Events"]
+                    Volunteer --> Certs["Certificates"]
+                    Volunteer --> Badges["Badges"]
+                    Volunteer --> Profile["Profile"]
+
+                    Organization --> OrgDash["Dashboard"]
+                    Organization --> CreateEvent["Create Events"]
+                    Organization --> ManageVols["Manage Volunteers"]
+                    Organization --> Analytics["Analytics"]
+                    Organization --> Certs2["Issue Certificates"]
+
+                    Admin --> Users["User Management"]
+                    Admin --> Orgs["Organization Management"]
+                    Admin --> Events2["Event Approval"]
+                    Admin --> Reports["Reports"]
+                    Admin --> Settings["System Settings"]
+
+                    API --> EventsAPI["Events API"]
+                    API --> UsersAPI["Users API"]
+                    API --> CertsAPI["Certificates API"]
+                    API --> AnalyticsAPI["Analytics API"]
+                    API --> PersonalizationAPI["Personalization API"]
+            </div>
+            <div class="diagram-description">
+                Shows the complete website structure with all major sections and their sub-pages. The diagram illustrates how users navigate through different parts of the platform based on their role (guest, volunteer, organization, admin).
+            </div>
+        </div>
+
+        <!-- USER REGISTRATION FLOW -->
+        <div class="diagram-section">
+            <div class="diagram-title">
+                <span class="diagram-icon">📝</span>
+                User Registration Flow
+            </div>
+            <div class="mermaid">
+                graph LR
+                    Start["👤 New User Visits"]
+                    Choice{"Choose User Type"}
+                    VolReg["Volunteer Registration"]
+                    OrgReg["Organization Registration"]
+                    Email["Email Verification"]
+                    Profile["Complete Profile"]
+                    Approve["Admin Review"]
+                    Success["✅ Account Active"]
+                    Dashboard["📊 Dashboard Access"]
+
+                    Start --> Choice
+                    Choice -->|Volunteer| VolReg
+                    Choice -->|Organization| OrgReg
+                    VolReg --> Email
+                    OrgReg --> Email
+                    Email --> Profile
+                    Profile --> Approve
+                    Approve -->|Approved| Success
+                    Approve -->|Rejected| VolReg
+                    Success --> Dashboard
+            </div>
+            <div class="diagram-description">
+                Illustrates the complete registration process for both volunteers and organizations. Users choose their type, verify email, complete profile information, await admin approval, and finally gain access to their dashboard.
+            </div>
+        </div>
+
+        <!-- VOLUNTEER USER JOURNEY -->
+        <div class="diagram-section">
+            <div class="diagram-title">
+                <span class="diagram-icon">👤</span>
+                Volunteer User Journey
+            </div>
+            <div class="mermaid">
+                graph TD
+                    Login["🔓 Login"]
+                    Dashboard["📊 Dashboard"]
+                    Browse["🔍 Browse Events"]
+                    Details["📋 Event Details"]
+                    Apply["✋ Apply for Event"]
+                    Status["📌 Track Application"]
+                    Attend["📍 Event Date"]
+                    CheckIn["✔️ Check-in"]
+                    Cert["📜 Earn Certificate"]
+                    Badges["🏅 Earn Badges"]
+                    Share["📤 Share Achievement"]
+                    Leaderboard["🏆 View Leaderboard"]
+                    Continue["Loop Back"]
+
+                    Login --> Dashboard
+                    Dashboard --> Browse
+                    Dashboard --> Status
+                    Dashboard --> Badges
+                    Browse --> Details
+                    Details --> Apply
+                    Apply --> Status
+                    Status -->|Approved| Attend
+                    Attend --> CheckIn
+                    CheckIn --> Cert
+                    Cert --> Badges
+                    Badges --> Share
+                    Badges --> Leaderboard
+                    Leaderboard --> Continue
+                    Continue --> Browse
+            </div>
+            <div class="diagram-description">
+                Shows the complete volunteer journey from login through event discovery, application, attendance, and achievement tracking. This flow demonstrates how volunteers progress through the platform and earn recognition.
+            </div>
+        </div>
+
+        <!-- ORGANIZATION WORKFLOW -->
+        <div class="diagram-section">
+            <div class="diagram-title">
+                <span class="diagram-icon">🏢</span>
+                Organization Event Management Workflow
+            </div>
+            <div class="mermaid">
+                graph TD
+                    OrgLogin["🔓 Organization Login"]
+                    OrgDash["📊 Organization Dashboard"]
+                    CreateEvent["➕ Create Event"]
+                    EventDetails["📝 Add Event Details"]
+                    SetLocation["📍 Set Location"]
+                    SetDate["📅 Set Date/Time"]
+                    PublishEvent["🚀 Publish Event"]
+                    ViewApps["📩 View Applications"]
+                    ApproveVols["✅ Approve Volunteers"]
+                    ManageEvent["🛠️ Manage Event"]
+                    EventDay["📍 Event Day"]
+                    MarkAttendance["✔️ Mark Attendance"]
+                    GenerateCerts["📜 Generate Certificates"]
+                    Analytics["📊 View Analytics"]
+
+                    OrgLogin --> OrgDash
+                    OrgDash --> CreateEvent
+                    OrgDash --> ViewApps
+                    OrgDash --> Analytics
+                    CreateEvent --> EventDetails
+                    EventDetails --> SetLocation
+                    SetLocation --> SetDate
+                    SetDate --> PublishEvent
+                    PublishEvent --> ViewApps
+                    ViewApps --> ApproveVols
+                    ApproveVols --> ManageEvent
+                    ManageEvent --> EventDay
+                    EventDay --> MarkAttendance
+                    MarkAttendance --> GenerateCerts
+                    GenerateCerts --> Analytics
+            </div>
+            <div class="diagram-description">
+                Illustrates the complete event management workflow for organizations, from event creation through publication, volunteer management, attendance tracking, and certificate generation.
+            </div>
+        </div>
+
+        <!-- SYSTEM ARCHITECTURE -->
+        <div class="diagram-section">
+            <div class="diagram-title">
+                <span class="diagram-icon">⚙️</span>
+                Backend System Architecture
+            </div>
+            <div class="mermaid">
+                graph TB
+                    Client["💻 Client Layer"]
+                    Web["🌐 Web Browser"]
+                    Mobile["📱 Mobile App"]
+                    API["🔌 API Gateway"]
+                    Auth["🔐 Authentication<br/>Sanctum/JWT"]
+                    Routes["🛣️ Routes<br/>Web/API/Admin/Org"]
+                    Controllers["🎮 Controllers<br/>26+ Controllers"]
+                    Services["⚙️ Services<br/>25+ Services"]
+                    Models["💾 Models<br/>60+ Models"]
+                    DB["🗄️ Database<br/>PostgreSQL"]
+                    Cache["⚡ Cache<br/>Redis"]
+                    Queue["📬 Queue System<br/>Redis/Supervisor"]
+                    Storage["📦 File Storage<br/>Local/S3"]
+
+                    Client --> Web
+                    Client --> Mobile
+                    Web --> API
+                    Mobile --> API
+                    API --> Auth
+                    Auth --> Routes
+                    Routes --> Controllers
+                    Controllers --> Services
+                    Services --> Models
+                    Models --> DB
+                    Services --> Cache
+                    Queue --> Cache
+                    DB --> Storage
+            </div>
+            <div class="diagram-description">
+                Shows the complete backend architecture with client layers, API gateway, authentication, routing system, controllers, services, models, database, cache, queue system, and storage infrastructure.
+            </div>
+        </div>
+
+        <!-- AI & PERSONALIZATION SYSTEM -->
+        <div class="diagram-section">
+            <div class="diagram-title">
+                <span class="diagram-icon">🤖</span>
+                AI & Personalization System
+            </div>
+            <div class="mermaid">
+                graph TD
+                    UserAction["👤 User Action"]
+                    Tracking["📊 Behavior Tracking"]
+                    Analysis["🔬 Analysis Engine"]
+                    Preferences["📋 Preference Profile"]
+                    Recommendations["🎯 Recommendation Engine"]
+                    Collaborative["👥 Collaborative Filtering"]
+                    ContentBased["📚 Content-Based"]
+                    Hybrid["🔀 Hybrid Scoring"]
+                    Predictions["🔮 Predictions"]
+                    ChurnModel["⚠️ Churn Prediction"]
+                    ConversionModel["💰 Conversion Prediction"]
+                    Results["✨ Results"]
+                    ABTest["🧪 A/B Testing"]
+                    FeatureFlags["🚩 Feature Flags"]
+
+                    UserAction --> Tracking
+                    Tracking --> Analysis
+                    Analysis --> Preferences
+                    Analysis --> Recommendations
+                    Recommendations --> Collaborative
+                    Recommendations --> ContentBased
+                    Collaborative --> Hybrid
+                    ContentBased --> Hybrid
+                    Preferences --> Predictions
+                    Predictions --> ChurnModel
+                    Predictions --> ConversionModel
+                    Hybrid --> Results
+                    ChurnModel --> Results
+                    ConversionModel --> Results
+                    Results --> ABTest
+                    Results --> FeatureFlags
+            </div>
+            <div class="diagram-description">
+                Demonstrates the AI and personalization system including behavior tracking, preference analysis, recommendation engines with collaborative filtering and content-based algorithms, predictive models for churn and conversion, plus A/B testing and feature flags.
+            </div>
+        </div>
+
+        <!-- DATA FLOW DIAGRAM -->
+        <div class="diagram-section">
+            <div class="diagram-title">
+                <span class="diagram-icon">🔄</span>
+                Data Flow & Processing
+            </div>
+            <div class="mermaid">
+                graph LR
+                    Input["📥 User Input<br/>Events/Forms"]
+                    Validate["✓ Validation<br/>Form Requests"]
+                    Process["⚙️ Processing<br/>Services"]
+                    Store["💾 Store<br/>Database"]
+                    Cache["⚡ Cache<br/>Redis"]
+                    Queue["📬 Queue<br/>Async Jobs"]
+                    Notify["📢 Notifications<br/>Email/SMS/Push"]
+                    Output["📤 Response<br/>API/View"]
+
+                    Input --> Validate
+                    Validate --> Process
+                    Process --> Store
+                    Process --> Cache
+                    Process --> Queue
+                    Cache --> Output
+                    Store --> Output
+                    Queue --> Notify
+                    Notify --> Output
+            </div>
+            <div class="diagram-description">
+                Shows how data flows through the system from user input through validation, processing, storage, caching, and async job queuing, eventually returning results to the user and triggering notifications.
+            </div>
+        </div>
+
+        <!-- AUTHENTICATION & AUTHORIZATION -->
+        <div class="diagram-section">
+            <div class="diagram-title">
+                <span class="diagram-icon">🔐</span>
+                Authentication & Authorization System
+            </div>
+            <div class="mermaid">
+                graph TD
+                    User["👤 User"]
+                    Login["🔓 Login"]
+                    Sanctum["🛡️ Laravel Sanctum<br/>Token Auth"]
+                    JWT["🔑 JWT Tokens<br/>Stateless Auth"]
+                    Roles["👥 Role Assignment<br/>Admin/Org/Volunteer"]
+                    Permissions["✓ Permissions<br/>Fine-grained Access"]
+                    Middleware["🛡️ Middleware<br/>Route Protection"]
+                    Protected["🔒 Protected Routes"]
+                    Dashboard["📊 Dashboard"]
+                    Logout["🚪 Logout"]
+
+                    User --> Login
+                    Login --> Sanctum
+                    Sanctum --> JWT
+                    JWT --> Roles
+                    Roles --> Permissions
+                    Permissions --> Middleware
+                    Middleware --> Protected
+                    Protected --> Dashboard
+                    Dashboard --> Logout
+                    Logout --> User
+            </div>
+            <div class="diagram-description">
+                Illustrates the complete authentication and authorization system using Laravel Sanctum, JWT tokens, role-based access control (RBAC), and middleware-protected routes to ensure secure access to different parts of the platform.
+            </div>
+        </div>
+
+        <!-- NOTIFICATION SYSTEM -->
+        <div class="diagram-section">
+            <div class="diagram-title">
+                <span class="diagram-icon">📢</span>
+                Multi-Channel Notification System
+            </div>
+            <div class="mermaid">
+                graph TD
+                    Event["⚡ Trigger Event<br/>Application/Status"]
+                    Queue["📬 Queue Job<br/>Notification Handler"]
+                    Channel{"🔀 Select Channel"}
+                    Email["📧 Email<br/>Zoho Mail"]
+                    SMS["📱 SMS<br/>Twilio/AWS SNS"]
+                    WhatsApp["💬 WhatsApp<br/>WhatsApp Business API"]
+                    Push["🔔 Push Notification<br/>Mobile/Web"]
+                    InApp["🔗 In-App<br/>Database Notification"]
+                    Preferences["⚙️ User Preferences<br/>Quiet Hours/Opt-out"]
+                    Log["📋 Log<br/>Notification Record"]
+                    Delivered["✅ Delivered"]
+
+                    Event --> Queue
+                    Queue --> Preferences
+                    Preferences --> Channel
+                    Channel -->|Email| Email
+                    Channel -->|SMS| SMS
+                    Channel -->|WhatsApp| WhatsApp
+                    Channel -->|Push| Push
+                    Channel -->|In-App| InApp
+                    Email --> Log
+                    SMS --> Log
+                    WhatsApp --> Log
+                    Push --> Log
+                    InApp --> Log
+                    Log --> Delivered
+            </div>
+            <div class="diagram-description">
+                Shows the multi-channel notification system that can deliver notifications via Email, SMS, WhatsApp, Push Notifications, and In-App messages, while respecting user preferences and quiet hours settings.
+            </div>
+        </div>
+
+        <!-- INTEGRATION POINTS -->
+        <div class="diagram-section">
+            <div class="diagram-title">
+                <span class="diagram-icon">🔌</span>
+                Third-Party Integration Points
+            </div>
+            <div class="mermaid">
+                graph TB
+                    Platform["🌐 SwaedUAE Platform"]
+                    Payment["💳 Payment<br/>Stripe"]
+                    SMS["📱 SMS<br/>Twilio"]
+                    Email["📧 Email<br/>Zoho Mail"]
+                    WhatsApp["💬 WhatsApp<br/>WhatsApp API"]
+                    Push["🔔 Push<br/>Firebase"]
+                    Emirates["🇦🇪 Emirates ID<br/>Government API"]
+                    Maps["🗺️ Maps<br/>Google Maps"]
+                    Storage["📦 Storage<br/>AWS S3"]
+                    Analytics["📊 Analytics<br/>Google Analytics"]
+
+                    Platform --> Payment
+                    Platform --> SMS
+                    Platform --> Email
+                    Platform --> WhatsApp
+                    Platform --> Push
+                    Platform --> Emirates
+                    Platform --> Maps
+                    Platform --> Storage
+                    Platform --> Analytics
+            </div>
+            <div class="diagram-description">
+                Illustrates all third-party service integrations including payment processing (Stripe), communications (Twilio, Zoho Mail, WhatsApp, Firebase), government integration (Emirates ID), location services (Google Maps), storage (AWS S3), and analytics.
+            </div>
+        </div>
+
+        <!-- DATABASE SCHEMA -->
+        <div class="diagram-section">
+            <div class="diagram-title">
+                <span class="diagram-icon">🗄️</span>
+                Core Database Entities & Relationships
+            </div>
+            <div class="mermaid">
+                graph TD
+                    User["👤 User<br/>ID, Email, Name<br/>Role, Status"]
+                    Volunteer["Volunteer<br/>User_ID, Bio<br/>Skills, Availability"]
+                    Organization["🏢 Organization<br/>ID, Name<br/>Verification, Contact"]
+                    Event["📋 Event<br/>ID, Title<br/>Date, Location, Org_ID"]
+                    Application["📝 Application<br/>ID, User_ID<br/>Event_ID, Status"]
+                    Attendance["✔️ Attendance<br/>ID, User_ID<br/>Event_ID, Checked_In"]
+                    Certificate["📜 Certificate<br/>ID, User_ID<br/>Event_ID, Code"]
+                    Badge["🏅 Badge<br/>ID, Title<br/>Criteria, Points"]
+                    UserBehavior["📊 Behavior<br/>User_ID, Action<br/>Entity_ID, Score"]
+                    Recommendation["🎯 Recommendation<br/>User_ID, Item_ID<br/>Score, Type"]
+
+                    User --> Volunteer
+                    User --> Application
+                    User --> Attendance
+                    User --> Certificate
+                    User --> Badge
+                    User --> UserBehavior
+                    User --> Recommendation
+                    Organization --> Event
+                    Event --> Application
+                    Event --> Attendance
+                    Event --> Certificate
+                    Attendance --> Certificate
+            </div>
+            <div class="diagram-description">
+                Shows the core database entities and their relationships, including users, volunteers, organizations, events, applications, attendance, certificates, badges, user behavior tracking, and recommendations. 113 tables total.
+            </div>
+        </div>
+
+        <!-- DEPLOYMENT ARCHITECTURE -->
+        <div class="diagram-section">
+            <div class="diagram-title">
+                <span class="diagram-icon">🚀</span>
+                Deployment & Infrastructure
+            </div>
+            <div class="mermaid">
+                graph TB
+                    Users["👥 Users<br/>Web/Mobile"]
+                    CDN["🚀 CDN<br/>Static Assets"]
+                    LB["⚖️ Load Balancer<br/>Nginx Reverse Proxy"]
+                    WebServer["🌐 Web Servers<br/>Nginx + PHP-FPM"]
+                    AppServer["⚙️ Application<br/>Laravel 12"]
+                    DB["🗄️ Database<br/>PostgreSQL"]
+                    Cache["⚡ Cache Layer<br/>Redis"]
+                    Queue["📬 Queue Worker<br/>Supervisor"]
+                    Storage["📦 Storage<br/>S3/Local"]
+                    Monitoring["📊 Monitoring<br/>Health Checks"]
+                    Backup["💾 Backup<br/>Daily Snapshots"]
+
+                    Users --> CDN
+                    Users --> LB
+                    LB --> WebServer
+                    WebServer --> AppServer
+                    AppServer --> DB
+                    AppServer --> Cache
+                    AppServer --> Queue
+                    AppServer --> Storage
+                    Queue --> DB
+                    DB --> Backup
+                    WebServer --> Monitoring
+                    AppServer --> Monitoring
+            </div>
+            <div class="diagram-description">
+                Shows the complete deployment infrastructure with CDN for static assets, load balancers, web servers, application layer, database, caching, queue workers, storage, monitoring, and automated backups.
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 SwaedUAE - Volunteer Management Platform</p>
+            <p>7 Development Phases | 200+ API Endpoints | Advanced AI & Personalization</p>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+        mermaid.contentLoaded();
+    </script>
+</body>
+</html>
