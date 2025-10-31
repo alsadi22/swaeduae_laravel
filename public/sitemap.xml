@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">
+
+    <!-- HOMEPAGE -->
+    <url>
+        <loc>https://swaeduae.ae/</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- PUBLIC PAGES -->
+    <url>
+        <loc>https://swaeduae.ae/pages/about</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/pages/contact</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/pages/privacy-policy</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/pages/terms-of-service</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/pages/faq</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/pages/volunteer-guide</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/pages/organization-resources</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/pages/cookie-policy</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- AUTHENTICATION PAGES -->
+    <url>
+        <loc>https://swaeduae.ae/login</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/register</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/register/volunteer</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/register/organization</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/forgot-password</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- VOLUNTEER ROUTES -->
+    <url>
+        <loc>https://swaeduae.ae/dashboard</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/profile</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/events</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/applications</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/certificates</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/badges</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/leaderboard</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/messages</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/notifications</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/settings</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- ORGANIZATION ROUTES -->
+    <url>
+        <loc>https://swaeduae.ae/organization/dashboard</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/organization/profile</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/organization/events</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/organization/volunteers</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/organization/applications</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/organization/analytics</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/organization/certificates</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/organization/settings</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- ADMIN ROUTES -->
+    <url>
+        <loc>https://swaeduae.ae/admin</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/admin/users</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/admin/organizations</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/admin/events</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/admin/applications</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/admin/attendance</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/admin/certificates</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/admin/badges</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/admin/analytics</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/admin/analytics-reports</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/admin/settings</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/admin/pages</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- API ENDPOINTS (Google won't crawl but useful for documentation) -->
+    <url>
+        <loc>https://swaeduae.ae/api/events</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>hourly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/api/users</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/api/organizations</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/api/certificates</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/api/badges</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/api/analytics</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>hourly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/api/personalization/recommendations</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>hourly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/api/predictions/churn-risk</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/api/search</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>hourly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://swaeduae.ae/api/notifications</loc>
+        <lastmod>2025-10-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+</urlset>
