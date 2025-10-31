@@ -199,6 +199,97 @@ This document provides a summary of the key features that have been implemented 
 - Participant messaging
 - Emergency communications
 
+## AI & Personalization System (Phase 6)
+
+### Recommendation Engine
+- **Collaborative Filtering:** Finds similar users and recommends based on their interactions
+- **Content-Based Recommendations:** Recommends items matching user preferences
+- **Hybrid Approach:** Combines multiple recommendation algorithms
+- **Smart Scoring:** 0-10 scale with engagement and popularity factors
+- **Conversion Tracking:** Monitors clicks and conversions on recommendations
+
+### Behavior Tracking & Analysis
+- **Action Tracking:** Monitors view, click, share, apply, complete actions
+- **Engagement Scoring:** Automatic scoring (view=1, click=2, share=4, apply=5, complete=10)
+- **User Insights:** Generates engagement level, volunteer type, lifetime value
+- **Pattern Recognition:** Identifies most active days, preferred types, action distribution
+- **Preference Learning:** Auto-learns and updates user preferences from behavior
+
+### Predictive Analytics
+- **Churn Prediction:** Identifies users at risk of leaving (low/medium/high risk)
+- **Conversion Prediction:** Predicts likelihood of event application conversion
+- **Retention Scoring:** Estimates user retention probability
+- **Risk Indicators:** Detects inactivity, declining engagement, behavioral changes
+- **Intervention Tracking:** Logs recommended actions and their effectiveness
+
+### Machine Learning Models
+- **Model Management:** Track training status, accuracy, precision, recall
+- **Version Control:** Maintains multiple model versions
+- **Performance Metrics:** Monitor model effectiveness over time
+- **Model Types:** Recommendation, clustering, prediction models
+- **Hyperparameter Tuning:** Configurable ML parameters
+
+### User Segmentation
+- **Behavioral Clustering:** Groups users by similar behavior patterns
+- **Cohort Analysis:** Tracks user groups over time
+- **Demographic Segmentation:** Groups by user characteristics
+- **Engagement-Based Segmentation:** Observer, applicant, active volunteer, advocate categories
+- **Custom Segments:** Ability to create custom user segments
+
+### A/B Testing Framework
+- **Experiment Management:** Create and manage A/B tests
+- **Variant Tracking:** Monitor performance of different variants
+- **Statistical Analysis:** Conversion rate calculation
+- **Winner Detection:** Automatic identification of winning variants
+- **Metrics Dashboard:** Real-time experiment performance monitoring
+
+### Content Personalization
+- **Per-User Variants:** Different content versions for different users
+- **Dynamic Titles & Descriptions:** Personalized text based on user profile
+- **Custom Metadata:** User-specific content customization
+- **Impression & Click Tracking:** Monitor content performance
+- **Conversion Events:** Track conversions for each variant
+
+### Feature Flags & Rollout
+- **Feature Management:** Enable/disable features without code deployment
+- **Gradual Rollout:** Deploy features to 0-100% of users incrementally
+- **User Targeting:** Target specific user segments for new features
+- **Real-time Toggle:** Changes take effect immediately
+- **Documentation:** Built-in feature descriptions
+
+### Admin Features for AI
+- **Dashboard:** View AI and personalization system status
+- **Feature Flag Management:** Create, toggle, and manage feature flags
+- **A/B Test Management:** Create, monitor, and conclude experiments
+- **Model Performance:** View ML model metrics and performance
+- **Segment Management:** Create and manage user segments
+- **Analytics:** View recommendation and personalization metrics
+
+### Engagement Metrics
+- **Daily Tracking:** Records engagement score, active users, conversions
+- **Trend Analysis:** Identifies engagement trends
+- **Anomaly Detection:** Alerts on unusual patterns
+- **User-Specific Metrics:** Individual engagement tracking
+- **Historical Data:** Time-series analysis capabilities
+
+### Data Privacy & Ethics
+- **User Data Protection:** Encrypted storage of behavioral data
+- **Consent Management:** Respects user privacy preferences
+- **Data Retention:** Automatic cleanup of old behavioral data
+- **Transparency:** Users can view their insights and preferences
+- **Fairness:** Algorithms designed to avoid bias
+
+### API Endpoints for AI Features
+- `GET /api/personalization/recommendations` - Get recommendations
+- `POST /api/personalization/track-behavior` - Log user actions
+- `GET /api/personalization/insights` - Get user insights
+- `POST /api/personalization/recommendations/{id}/click` - Track clicks
+- `POST /api/personalization/recommendations/{id}/convert` - Track conversions
+- `GET /api/predictions/churn-risk` - Get churn risk
+- `GET /api/predictions/retention` - Get retention score
+- `POST /api/predictions/conversion` - Predict conversion
+- `GET /api/personalization/content/{type}/{id}` - Get personalized content
+
 ## Mobile Responsiveness
 - Fully responsive design
 - Mobile-friendly QR code scanner
